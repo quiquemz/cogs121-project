@@ -12,6 +12,7 @@ A mobile web application that has a recipe database which stores recipes created
 
 ### Low Fidelity Prototypes:
 **Prototype 1**
+
 ![Screen 1 - Splash/Login|,50%](paper_prototypes/version-1/Splash_Login.PNG)
 ![Screen 2 - Individual Recipes](paper_prototypes/version-1/Following_Recipe.PNG)
 ![Screen 3 - Adding New Recipes](paper_prototypes/version-1/Add_New_Recipe.PNG)
@@ -19,6 +20,7 @@ A mobile web application that has a recipe database which stores recipes created
 ![Screen 5 - Selecting Personal Preferences](paper_prototypes/version-1/Select_Preferences.PNG)
 
 **Prototype 2**
+
 ![Screen 1 - Splash/Login](paper_prototypes/version-2/splash%20screen.png)
 ![Screen 2 - Homepage](paper_prototypes/version-2/homepage.png)
 ![Screen 3 - Create Recipe](paper_prototypes/version-2/create%20recipe.png)
