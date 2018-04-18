@@ -5,12 +5,12 @@
 ### Solution Concept
 A mobile web application that has a recipe database which stores recipes created by users and recipes pulled from different websites. It recommends recipes to user based on their preferences. Allows users to favorite/bookmark recipes, add them to a calendar to help them plan their meals. Also creates an automated grocery list for users based on recipes they've planned.
 
-### Storyboards:
+### Storyboards
 **Storyboard 1**
 
 **Storyboard 2**
 
-### Low Fidelity Prototypes:
+### Low Fidelity Prototypes
 **Prototype 1**
 
 ![Screen 1 - Splash/Login|,50%](paper_prototypes/version-1/Splash_Login.PNG)
