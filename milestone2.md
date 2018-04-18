@@ -12,8 +12,8 @@ A mobile web application that has a recipe database which stores recipes created
 
 ### Low Fidelity Prototypes:
 **Prototype 1**
-![Screen 1 - Splash/Login](paper_prototypes/version-1/Splash_Login.PNG)
-![Screen 2 - Individual Recipes](paper_prototypes/version-1/Following_Recipe.PNG)
+![Screen 1 - Splash/Login](paper_prototypes/version-1/Splash_Login.PNG | width=100)
+![Screen 2 - Individual Recipes](paper_prototypes/version-1/Following_Recipe.PNG | width=100)
 ![Screen 3 - Adding New Recipes](paper_prototypes/version-1/Add_New_Recipe.PNG)
 ![Screen 4 - Calendar & Grocery List](paper_prototypes/version-1/Calendar_GroceryList_Edit.PNG)
 ![Screen 5 - Selecting Personal Preferences](paper_prototypes/version-1/Select_Preferences.PNG)
