@@ -7,9 +7,10 @@ A mobile web application that has a recipe database which stores recipes created
 
 ### Storyboards
 **Storyboard 1**
-https://drive.google.com/file/d/1n43-JzxUJ4f0OLiwli_xrzC7qPTQ6Igd/view?usp=sharing
+![Storyboard 1 - Gym|,50%](paper_storyboards/gym_story.JPG)
 
 **Storyboard 2**
+![Storyboard 2 - College Student|,50%](paper_storyboards/college_student_story.jpg)
 
 ### Low Fidelity Prototypes
 **Prototype 1**
