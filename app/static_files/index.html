@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Reciprep</title>
+
+<script src="jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(() => {
+     $.ajax({
+       url: 'recipes/',
+       type: 'GET',
+       dataType: 'json',
+       success: (data) => {
+          $("#recipe1Title").html(data['Recipe1'].name);
+          $("#recipe1Img").attr('src', data['Recipe1'].img);
+          $("#recipe2Title").html(data['Recipe2'].name);
+          $("#recipe2Img").attr('src', data['Recipe2'].img);
+       }
+     });
+
+    $("#searchBtn").click(() => {
+      const requestURL = 'recipes/' + $("#nameBox").val();
+
+      $.ajax({
+        url: requestURL,
+        type: 'GET',
+        dataType: 'json',
+        success: (data) => {
+          $("#recipe1Title").html(data.name);
+          $("#recipe1Img").attr('src', data.img);
+          $("#recipe2").html("");
+        }
+      });
+    });
+  });
+</script>
+
+</head>
+<body>
+  <h1 style="text-align: center;">Reciprep</h1>
+
+  Search Recipe: <input id="nameBox" type="text" size="20"/>
+  <button id="searchBtn">Search</button>
+
+  <button id="createRecipeBtn" style="float: right;">Create New Recipe</button>
+
+  <div id="recipe1">
+    <h4 id="recipe1Title"></h4>
+    <img id="recipe1Img" style="max-width: 200px;"></img>
+  </div>
+
+  <hr>
+
+  <div id="recipe2">
+    <h4 id="recipe2Title"></h4>
+    <img id="recipe2Img" style="max-width: 200px;"></img>
+  </div>
+</body>
+</html>
