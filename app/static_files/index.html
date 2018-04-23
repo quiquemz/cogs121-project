@@ -19,20 +19,30 @@
        });
 
       $("#searchBtn").click(() => {
-        const requestURL = 'recipes/' + $("#nameBox").val();
+      	const val = $("#nameBox").val();
+        const requestURL = 'recipes/' + val;
 
         $.ajax({
           url: requestURL,
           type: 'GET',
           dataType: 'json',
           success: (data) => {
-            $("#recipe1Title").html(data.name);
-            $("#recipe1Img").attr('src', data.img);
-            $("#recipe2").html("");
-          }
-        });
-      });
-    });
+          	if (val != "") {
+	            $("#recipe1Title").html(data.name);
+	            $("#recipe1Img").attr('src', data.img);
+	            $("#recipe2").hide();
+        	}
+        	else {
+	            $("#recipe1Title").html(data['Recipe1'].name);
+	            $("#recipe1Img").attr('src', data['Recipe1'].img);
+		        $("#recipe2").show();
+	            $("#recipe2Title").html(data['Recipe2'].name);
+	            $("#recipe2Img").attr('src', data['Recipe2'].img);
+        	}
+	       }
+	    });
+	  });
+  });
   </script>
 
   <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -64,7 +74,7 @@
         <div class="input-group">
           <input id="nameBox" type="text" class="form-control" placeholder="Search for...">
           <span class="input-group-btn">
-            <button id="searchBtn" class="btn btn-default" type="button">Go!</button>
+            <button id="searchBtn" class="btn btn-default" type="button">Search</button>
           </span>
         </div>
       </div>
@@ -78,10 +88,10 @@
         <div class="col-lg-8">
 
           <!-- First Recipe -->
-          <div class="box grid recipes">
+          <div class="box grid recipes" id="recipe1">
             <div class="by"><i class="fa fa-user" aria-hidden="true"></i> Recommended for you</div>
-              <a href="recipe-detail.html"><img id="recipe1Img" height="300px" width="100%" alt=""></a>
-              <h2><a href="recipe-detail.html" id="recipe1Title"></a></h2>
+              <a href="details.html?Recipe1"><div id="recipe1Img" alt="" style="background-image: url('recipe1.jpg'); min-height: 400px; width: 100%; margin-bottom: 32px;"></div>
+              <h2><a href="details.html?Recipe1" id="recipe1Title"></a></h2>
               <p>Dapibus mattis a. Nec lacus nam. Volutpat molestie ipsum. Eu et fermentum malesuada et et lorem mauris aenean partur..</p>
               <div class="tag">
                 <a href="#">Salmon</a>
@@ -91,10 +101,10 @@
           </div>
 
           <!-- Second Recipe -->
-          <div class="box grid recipes">
+          <div class="box grid recipes" id="recipe2">
             <div class="by"><i class="fa fa-user" aria-hidden="true"></i> Recommended for you</div>
-            <a href="recipe-detail.html"><img id="recipe2Img" height="300px" width="100%" alt=""></a>
-            <h2><a href="recipe-detail.html" id="recipe2Title">Grilled Salmon Tzatziki Bowls</a></h2>
+            <a href="details.html?Recipe2"><img id="recipe2Img" height="300px" width="100%" alt=""></a>
+            <h2 id="recipe2Title"><a href="details.html?Recipe2">Grilled Salmon Tzatziki Bowls</a></h2>
             <p>Dapibus mattis a. Nec lacus nam. Volutpat molestie ipsum. Eu et fermentum malesuada et et lorem mauris aenean partur..</p>
             <div class="tag">
               <a href="#">Salmon</a>

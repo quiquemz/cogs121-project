@@ -4,6 +4,28 @@
 
   <script src="jquery-3.3.1.min.js"></script>
 
+  <script type="text/javascript">
+
+    $(document).ready(() => {
+      var recipeName = location.search.substring(1).split("&")[0];
+
+       $.ajax({
+         url: 'recipes/',
+         type: 'GET',
+         dataType: 'json',
+         success: (data) => {
+            console.log(data);
+            console.log(recipeName);
+            $("#recipe1Title").html(data[recipeName].name);
+            $("#recipe1Img").attr('src', data[recipeName].img);
+         }
+       });
+
+    });
+
+
+  </script>
+
   <link href="css/font-awesome.min.css" rel="stylesheet">
 
   <!-- CSS -->
@@ -15,7 +37,7 @@
   <meta charset = "utf-8">
   <meta name = "viewport" content = "width=device-width, initial-scale=1">
   <link href = "css/bootstrap.css" rel = "stylesheet" type = "text/css"/>
-  <link href="css.css" rel="stylesheet" type="text/css"/>
+  <!--<link href="css.css" rel="stylesheet" type="text/css"/>-->
   <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
@@ -41,7 +63,7 @@
           <!-- First Recipe -->
           <div class="box grid recipes">
               <a href="recipe-detail.html"><img id="recipe1Img" height="300px" width="100%" alt=""></a>
-              <h2><a href="recipe-detail.html" id="recipe1Title"></a></h2>
+              <h2 id="recipe1Title"></h2>
               <p>Lorem ipsum dolor sit amet, usu eu vocibus laboramus appellantur, pro no natum ullum omittam. Mei vitae utinam complectitur eu. Te usu cibo vulputate. Id propriae adipisci pro. Legere nominati ut mel, natum libris at vix.</p>
               <div class="tag">
                 <a href="#">Mushroomers</a>

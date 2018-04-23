@@ -14,6 +14,7 @@ app.get('/recipes', (req, res) => {
 
 app.get('/recipes/:name', (req, res) => {
   const recipeToLookup = req.params.name;
+  //recipeToLookup = recipeToLookup.charAt(0).toUpperCase() + recipeToLookup.slice(1);
   const val = recipeDatabase[recipeToLookup];
   if (val) {
     res.send(val);
@@ -22,6 +23,7 @@ app.get('/recipes/:name', (req, res) => {
     res.send({}); //empty Object
   }
 });
+
 
 app.listen(3000, () => {
   console.log('Server started on http://localhost:3000');
