@@ -1,0 +1,142 @@
+<html>
+<head>
+  <title>ReciPrep</title>
+
+  <script src="jquery-3.3.1.min.js"></script>
+
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+
+  <!-- CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.min.css" rel="stylesheet">
+  <link href="css/select2.min.css" rel="stylesheet">
+  
+  <!-- Reply Box -->
+  <meta charset = "utf-8">
+  <meta name = "viewport" content = "width=device-width, initial-scale=1">
+  <link href = "css/bootstrap.css" rel = "stylesheet" type = "text/css"/>
+  <link href="css.css" rel="stylesheet" type="text/css"/>
+  <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container-fluid justify-content-center">
+      <a class="navbar-brand" href="index.html">
+        <i class="fa fa-cutlery" aria-hidden="true"></i>  ReciPrep</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+  </nav>
+
+  <!-- Recipe Boxes -->
+  <div class="featured">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+          <!-- First Recipe -->
+          <div class="box grid recipes">
+              <a href="recipe-detail.html"><img id="recipe1Img" height="300px" width="100%" alt=""></a>
+              <h2><a href="recipe-detail.html" id="recipe1Title"></a></h2>
+              <p>Lorem ipsum dolor sit amet, usu eu vocibus laboramus appellantur, pro no natum ullum omittam. Mei vitae utinam complectitur eu. Te usu cibo vulputate. Id propriae adipisci pro. Legere nominati ut mel, natum libris at vix.</p>
+              <div class="tag">
+                <a href="#">Mushroomers</a>
+                <a href="#">Salmon</a>
+                <a href="#">Leafy Greens</a>
+                <a href="#">Cucumber</a>
+            </div>
+          </div>
+
+          <!-- Details of the Recipe -->
+          <div class="direction">
+            <div class="row">
+              <div class="col-lg-6">
+                <h3 align="left">Ingredients</h3>
+                  <ul class="ingredients">
+                    <h4 align="left"> 6 Chicken </h4>
+                    <h4 align="left"> 2 Mushroomers </h4>
+                    <h4 align="left"> 4 Beef </h4>
+                    <h4 align="left"> 2 Pepper </h4>
+                    <h4 align="left"> 6 Good Neighbours </h4>
+                  </ul>
+              </div>
+              <div class="col-lg-6">
+                <h3 align="left">Direction</h3>
+                  <ul class="directions">
+                    <p align="left"> Mei latine maluisset constituam ut. Eum vero vocibus at, minim debet deterruisset cum ei. Soluta virtute tibique cu quo, his vivendo suscipit ea. Legere fabulas pro ea. </p>
+                    <p align="left"> An unum soluta eos, audire meliore te nam. Mundi choro sensibus ut vim, ut sed errem ludus tractatos, eu vix fierent definiebas. Ad est autem appareat. Vim ne latine interpretaris, eum sensibus mediocritatem cu.</p>
+                    <p align="left"> Est an etiam cetero fierent. At sit primis evertitur. Est prima electram voluptatum ne. Nec id atqui contentiones mediocritatem, ut mel enim soleat audire, tecripta consequat ea. </p>
+                    <p align="left"> Vidit mutat periculis sed ex, ex mel nihil suscipiantur. Brute noster aeterno et eum, mea et idque primis repudiare. </p>
+              </div> 
+              <div class="Nutrition Facts">
+                <h3 align="left">Nutrition Facts</h3>
+                  <div>
+                    <p>Calories:</p>
+                      <p>
+                        <strong>632 kcal </strong>
+                  <div>
+                    <p>Fat:</p>
+                      <p>
+                        <strong>92 g </strong>
+                  <div>
+                    <p>Protein:</p>
+                      <p>
+                        <strong>63g </strong>     
+              </div> 
+            </div>
+            <div id='form'>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3 align="left">Leave a Reply </h3>
+                  <form action="" method="POST" id="commentform">
+                    <div id="comment-name" class="form-row">
+                      <input type = "text" placeholder = "Name (required)" name = "dname"  id = "name" >
+                    </div>
+                    <div id="comment-email" class="form-row">
+                      <input type = "text" placeholder = "Mail (will not be published) (required)" name = "demail"  id = "email">
+                    </div>
+                    <div id="comment-url" class="form-row">
+                      <input type = "text" placeholder = "Website" name = "url"  id = "url" >
+                    </div>
+                    <div id="comment-message" class="form-row">
+                      <textarea name = "comment" placeholder = "Message" id = "comment" ></textarea>
+                    </div>
+                      <a href="#"><input type="submit" name="dsubmit" id="commentSubmit" value="Submit Comment"></a>
+                      <input style="width: 30px" type="checkbox" value="1" name="subscribe" id="subscribe" checked="checked">
+                      <p1><b>Notify me when new comments are added.</b></p1>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--
+  Search Recipe: <input id="nameBox" type="text" size="20"/>
+  <button id="searchBtn">Search</button>
+  <button id="createRecipeBtn" style="float: right;">Create New Recipe</button>
+-->
+
+<!--
+  <div id="recipe1">
+    <h4 id="recipe1Title"></h4>
+    <img id="recipe1Img" style="max-width: 200px;"></img>
+  </div>
+
+  <hr>
+
+  <div id="recipe2">
+    <h4 id="recipe2Title"></h4>
+    <img id="recipe2Img" style="max-width: 200px;"></img>
+  </div>
+-->
+
+</body>
+</html>
