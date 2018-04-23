@@ -29,7 +29,8 @@
           success: (data) => {
           	if (val != "") {
 	            $("#recipe1Title").html(data.name);
-	            $("#recipe1Img").attr('src', data.img);
+              console.log(data.img);
+	            $("#recipe1Img").css("background-image", 'url('+ data.img +')');  
 	            $("#recipe2").hide();
         	}
         	else {
@@ -103,7 +104,7 @@
           <!-- Second Recipe -->
           <div class="box grid recipes" id="recipe2">
             <div class="by"><i class="fa fa-user" aria-hidden="true"></i> Recommended for you</div>
-            <a href="details.html?Recipe2"><img id="recipe2Img" height="300px" width="100%" alt=""></a>
+            <a href="details.html?Recipe2"><div id="recipe2Img" alt="" style="background-image: url('recipe2.jpg'); min-height: 400px; width: 100%; margin-bottom: 32px;"></div></a>
             <h2 id="recipe2Title"><a href="details.html?Recipe2">Grilled Salmon Tzatziki Bowls</a></h2>
             <p>Dapibus mattis a. Nec lacus nam. Volutpat molestie ipsum. Eu et fermentum malesuada et et lorem mauris aenean partur..</p>
             <div class="tag">
