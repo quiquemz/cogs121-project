@@ -1,30 +1,46 @@
-const express = require('express');
-const app = express();
+'use strict';
 
-app.use(express.static('static_files/'));
+var express = require('express');
+var http = require('http');
+var path = require('path');
+var app = express();
+var server = http.createServer(app);
 
+/************** API **************/
 const recipeDatabase = {
-  'Recipe1':  {name: 'Grilled Salmon Tzatziki Bowls', img:'recipe1.jpg'},
-  'Recipe2':  {name: 'Cacio e Pepe with Arugula and Lemon', img:'recipe2.jpg'},
+  'Recipe1': {
+    name: 'Grilled Salmon Tzatziki Bowls',
+    img: 'images/recipe1.jpg'
+  },
+  'Recipe2': {
+    name: 'Cacio e Pepe with Arugula and Lemon',
+    img: 'images/recipe2.jpg'
+  },
 };
 
-app.get('/recipes', (req, res) => {
+app.get('/api/recipes', (req, res) => {
   res.send(recipeDatabase);
 });
 
-app.get('/recipes/:name', (req, res) => {
+app.get('/api/recipes/:name', (req, res) => {
   const recipeToLookup = req.params.name;
   //recipeToLookup = recipeToLookup.charAt(0).toUpperCase() + recipeToLookup.slice(1);
   const val = recipeDatabase[recipeToLookup];
   if (val) {
     res.send(val);
-  }
-  else {
+  } else {
     res.send({}); //empty Object
   }
 });
 
+/************** Server **************/
+app.get('/', function(req, res) {
+  res.sendfile('static/index.html');
+});
 
-app.listen(3000, () => {
-  console.log('Server started on http://localhost:3000');
+app.use(express.static('static'));
+
+server.listen(3000, 'localhost');
+server.on('listening', function() {
+  console.log('Express server started on port %s at %s', server.address().port, server.address().address);
 });

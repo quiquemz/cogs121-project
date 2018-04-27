@@ -1,0 +1,91 @@
+<html>
+
+  <head>
+    <title>ReciPrep</title>
+
+    <!-- JS plugins -->
+    <script src="js/plugins/jquery-3.3.1.min.js"></script>
+
+    <!-- CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.min.css" rel="stylesheet">
+    <link href="css/select2.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Mobile capable -->
+    <meta name="viewport" content="width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <div class="container-fluid justify-content-center">
+        <a class="navbar-brand" href="index.html"><i class="fa fa-cutlery" aria-hidden="true"></i>ReciPrep</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Search Bar -->
+    <div class="container">
+      <br>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="input-group">
+            <input id="nameBox" type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+            <button id="searchBtn" class="btn btn-default" type="button">Search</button>
+          </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recipe Boxes -->
+    <div class="featured">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+
+            <!-- First Recipe -->
+            <div class="box grid recipes" id="recipe1">
+              <div class="by"><i class="fa fa-user" aria-hidden="true"></i> Recommended for you</div>
+              <a href="recipes.html?Recipe1">
+                <div id="recipe1Img" alt="" style="background-image: url('images/recipe1.jpg'); min-height: 400px; width: 100%; margin-bottom: 32px;"></div>
+                <h2><a href="recipes.html?Recipe1" id="recipe1Title"></a></h2>
+                <p>Dapibus mattis a. Nec lacus nam. Volutpat molestie ipsum. Eu et fermentum malesuada et et lorem mauris aenean partur..</p>
+                <div class="tag">
+                  <a href="#">Salmon</a>
+                  <a href="#">Leafy Greens</a>
+                  <a href="#">Cucumber</a>
+                </div>
+            </div>
+
+            <!-- Second Recipe -->
+            <div class="box grid recipes" id="recipe2">
+              <div class="by"><i class="fa fa-user" aria-hidden="true"></i> Recommended for you</div>
+              <a href="recipes.html?Recipe2">
+                <div id="recipe2Img" alt="" style="background-image: url('images/recipe2.jpg'); min-height: 400px; width: 100%; margin-bottom: 32px;"></div>
+              </a>
+              <h2 id="recipe2Title"><a href="recipes.html?Recipe2">Grilled Salmon Tzatziki Bowls</a></h2>
+              <p>Dapibus mattis a. Nec lacus nam. Volutpat molestie ipsum. Eu et fermentum malesuada et et lorem mauris aenean partur..</p>
+              <div class="tag">
+                <a href="#">Salmon</a>
+                <a href="#">Leafy Greens</a>
+                <a href="#">Cucumber</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="js/index.js"></script>
+  </body>
+
+</html>
