@@ -4,7 +4,7 @@ $(document).ready(() => {
     const imageBaseUrl = 'https://spoonacular.com/recipeImages/'
 
     recipes.forEach((recipe) => {
-      const colWidth = $('<div class="col-sm-6 col-md-3"></div>');
+      const colWidth = $('<div class="col-sm-6 col-md-4"></div>');
       const card = $('<div class="card"></div>');
       const cardImg = $('<img class="card-img-top" src="' + imageBaseUrl + recipe.image + '" alt="Card image cap">');
       const cardBody = $('<div class="card-body"></div>');
