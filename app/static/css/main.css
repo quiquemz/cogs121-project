@@ -138,6 +138,10 @@ p {
   border: none;
 }
 
+#content .card {
+  margin-bottom: 20px;
+}
+
 .overlay {
   /* full screen */
   width: 100vw;

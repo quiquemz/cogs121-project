@@ -1,36 +1,41 @@
 $(document).ready(() => {
+  function createRecipeCards(recipes) {
+    console.log(recipes);
+    const imageBaseUrl = 'https://spoonacular.com/recipeImages/'
+
+    recipes.forEach((recipe) => {
+      const colWidth = $('<div class="col-sm-6 col-md-3"></div>');
+      const card = $('<div class="card"></div>');
+      const cardImg = $('<img class="card-img-top" src="' + imageBaseUrl + recipe.image + '" alt="Card image cap">');
+      const cardBody = $('<div class="card-body"></div>');
+      const cardTitle = $('<h5 class="card-title">' + recipe.title + '</h5>');
+      const cardBodyText = $('<p class="card-text">Instructions under construction. API is not sending instructions</p>');
+      const cardFooter = $('<div class="card-footer"></div>');
+      const cardPrepTime = $('<span class="card-text float-left">' + recipe.readyInMinutes + ' mins' + '</span>');
+      const cardStar = $('<div class="r-btn close-sidebar-btn float-right"><i class="fa fa-star"></i></div>');
+
+      $('.cards-deck').append(
+        colWidth.append(
+          card.append(cardImg).append(
+            cardBody.append(cardTitle).append(cardBodyText)
+          ).append(
+            cardFooter.append(cardPrepTime).append(cardStar)
+          )
+        )
+      );
+    });
+
+  }
+
   $.ajax({
-    url: 'api/recipes/',
+    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?diet=vegetarian&instructionsRequired=true',
     type: 'GET',
+    headers: {
+      "X-Mashape-Key": "fE0JDoXOrQmshCwRo1DwJRH2XhXKp1YnYEAjsnBx1IKReJz2Bv"
+    },
     dataType: 'json',
     success: (data) => {
-      $("#recipe1Title").html(data['Recipe1'].name);
-      $("#recipe1Img").attr('src', data['Recipe1'].img);
-      $("#recipe2Title").html(data['Recipe2'].name);
-      $("#recipe2Img").attr('src', data['Recipe2'].img);
+      createRecipeCards(data.results);
     }
-  });
-
-  $("#searchBtn").click(() => {
-    const val = $("#nameBox").val();
-    const requestURL = 'recipes/' + val;
-    $.ajax({
-      url: requestURL,
-      type: 'GET',
-      dataType: 'json',
-      success: (data) => {
-        if (val != "") {
-          $("#recipe1Title").html(data.name);
-          $("#recipe1Img").css("background-image", 'url(' + data.img + ')');
-          $("#recipe2").hide();
-        } else {
-          $("#recipe1Title").html(data['Recipe1'].name);
-          $("#recipe1Img").attr('src', data['Recipe1'].img);
-          $("#recipe2").show();
-          $("#recipe2Title").html(data['Recipe2'].name);
-          $("#recipe2Img").attr('src', data['Recipe2'].img);
-        }
-      }
-    });
   });
 });
