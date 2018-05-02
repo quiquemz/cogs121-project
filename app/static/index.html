@@ -1,91 +1,137 @@
-<html>
+<html !DOCTYPE>
 
   <head>
     <title>ReciPrep</title>
+    <!-- Required meta tags -->
+    <!-- <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="mobile-web-app-capable" content="yes"> -->
 
-    <!-- JS plugins -->
-    <script src="js/plugins/jquery-3.3.1.min.js"></script>
-
-    <!-- CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.min.css" rel="stylesheet">
-    <link href="css/select2.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- Mobile friendly -->
-    <meta name="viewport" content="width=device-width">
-    <meta name="mobile-web-app-capable" content="yes">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Contrail+One|Poppins:300,400,500,600,700" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" <!-- Bootstrap CSS CDN -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
 
   </head>
 
   <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-      <div class="container-fluid justify-content-center">
-        <a class="navbar-brand" href="index.html"><i class="fa fa-cutlery" aria-hidden="true"></i>ReciPrep</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-    </nav>
+    <div class="wrapper">
 
-    <!-- Search Bar -->
-    <div class="container">
-      <br>
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="input-group">
-            <input id="nameBox" type="text" class="form-control" placeholder="Search for...">
-            <span class="input-group-btn">
-            <button id="searchBtn" class="btn btn-default" type="button">Search</button>
-          </span>
+      <!-- Header -->
+      <nav id="header">
+        <div class="r-btn open-sidebar-btn">
+          <i class="fa fa-bars"></i>
+        </div>
+        <div id="brand">
+          <h3>RECIPREP</h3>
+        </div>
+        <div class="r-btn add-recipe-btn">
+          <i class="fa fa-plus-circle"></i>
+        </div>
+      </nav>
+
+      </nav>
+
+      <!-- Sidebar -->
+      <nav id="sidebar">
+        <div class="r-btn close-sidebar-btn">
+          <i class="fa fa-times"></i>
+        </div>
+        <!-- Sidebar Header -->
+        <div class="sidebar-header">
+          <div id="brand">
+            <h3>RECIPREP</h3>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Recipe Boxes -->
-    <div class="featured">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
+        <!-- Sidebar Links -->
+        <ul class="list-unstyled">
+          <li class="active"><a href="#">Discover</a></li>
+          <li><a href="#">Calendar</a></li>
+          <li><a href="#">Grocery List</a></li>
+          <li><a href="#">Favorites</a></li>
+        </ul>
 
-            <!-- First Recipe -->
-            <div class="box grid recipes" id="recipe1">
-              <div class="by"><i class="fa fa-user" aria-hidden="true"></i> Recommended for you</div>
-              <a href="recipes.html?Recipe1">
-                <div id="recipe1Img" alt="" style="background-image: url('images/recipe1.jpg'); min-height: 400px; width: 100%; margin-bottom: 32px;"></div>
-                <h2><a href="recipes.html?Recipe1" id="recipe1Title"></a></h2>
-                <p>Dapibus mattis a. Nec lacus nam. Volutpat molestie ipsum. Eu et fermentum malesuada et et lorem mauris aenean partur..</p>
-                <div class="tag">
-                  <a href="#">Salmon</a>
-                  <a href="#">Leafy Greens</a>
-                  <a href="#">Cucumber</a>
-                </div>
+        <div class="sidebar-footer">
+          <ul class="list-unstyled">
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Sign Up</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Page Content -->
+      <div id="content">
+        <div class="container">
+
+          <!-- Search input -->
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search for a recipe" aria-label="searched recipe" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn search-recipe-btn" type="button">Search</button>
             </div>
+          </div>
 
-            <!-- Second Recipe -->
-            <div class="box grid recipes" id="recipe2">
-              <div class="by"><i class="fa fa-user" aria-hidden="true"></i> Recommended for you</div>
-              <a href="recipes.html?Recipe2">
-                <div id="recipe2Img" alt="" style="background-image: url('images/recipe2.jpg'); min-height: 400px; width: 100%; margin-bottom: 32px;"></div>
-              </a>
-              <h2 id="recipe2Title"><a href="recipes.html?Recipe2">Grilled Salmon Tzatziki Bowls</a></h2>
-              <p>Dapibus mattis a. Nec lacus nam. Volutpat molestie ipsum. Eu et fermentum malesuada et et lorem mauris aenean partur..</p>
-              <div class="tag">
-                <a href="#">Salmon</a>
-                <a href="#">Leafy Greens</a>
-                <a href="#">Cucumber</a>
+          <!-- Recipe cards -->
+          <div class="card-deck">
+            <div class="card">
+              <img class="card-img-top" src="images/recipe1.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Recipe title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
+              <div class="card-footer">
+                <span class="card-text float-left">25 mins</span>
+                <div class="r-btn close-sidebar-btn float-right">
+                  <i class="fa fa-star"></i>
+                </div>
               </div>
             </div>
-
+            <div class="card">
+              <img class="card-img-top" src="images/recipe2.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Recipe title</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+              </div>
+              <div class="card-footer">
+                <span class="card-text float-left">25 mins</span>
+                <div class="r-btn close-sidebar-btn float-right">
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="images/recipe3.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                <!-- <p class="card-text"><small class="text-muted">25 mins</small></p> -->
+              </div>
+              <div class="card-footer">
+                <span class="card-text float-left">25 mins</span>
+                <div class="r-btn close-sidebar-btn float-right">
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="overlay"></div>
+
     </div>
 
-    <script type="text/javascript" src="js/index.js"></script>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap Js CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
   </body>
 
 </html>
