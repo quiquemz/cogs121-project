@@ -1,0 +1,26 @@
+#header {
+  height: 54px;
+  min-width: 100%;
+  background: #D14937;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+#header .left-header-btn {
+  position: absolute;
+  left: 20px;
+  top: 15px;
+  font-size: 1.3em;
+}
+
+#header .right-header-btn {
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  font-size: 1.6em;
+}

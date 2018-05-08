@@ -7,6 +7,13 @@ import path from 'path';
 
 let app = express();
 let server = http.createServer(app);
+let serviceAccount = ('./serviceAccountKey.json');
+
+/************ FIREBASE ************/
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'https://getreciprep.firebaseio.com/'
+});
 
 /************** API **************/
 const recipeDatabase = {
@@ -45,4 +52,5 @@ app.use(express.static('static'));
 server.listen(3000, 'localhost');
 server.on('listening', function() {
   console.log('Express server started on port %s at %s', server.address().port, server.address().address);
+  console.log('If you ran "gulp" http://localhost:8080/ should be available for rapid development.');
 });
