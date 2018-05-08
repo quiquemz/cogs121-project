@@ -1,10 +1,12 @@
 'use strict';
 
-var express = require('express');
-var http = require('http');
-var path = require('path');
-var app = express();
-var server = http.createServer(app);
+import * as admin from 'firebase-admin';
+import express from 'express';
+import http from 'http';
+import path from 'path';
+
+let app = express();
+let server = http.createServer(app);
 
 /************** API **************/
 const recipeDatabase = {

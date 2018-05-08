@@ -1,0 +1,91 @@
+hr {
+  margin: 20px 0 0 0;
+}
+
+.week-slider .prev {
+  text-align: left;
+  color: #D14937;
+  font-size: 1.5em;
+}
+
+.week-slider .name {
+  text-align: center;
+}
+
+.week-slider .next {
+  text-align: right;
+  color: #D14937;
+  font-size: 1.5em;
+}
+
+.week-description {
+  font-weight: 100;
+  font-size: 0.76em;
+  color: #AAA;
+}
+
+.week-description .start {
+  margin: 0 5px 0 auto;
+}
+
+.week-description .end {
+  margin: 0 auto 0 5px;
+}
+
+.week-days {
+  margin: 12px 4px;
+}
+
+.week-days .day-btn {
+  border-radius: 50%;
+  background: #EEE;
+  width: 34px;
+  height: 34px;
+  font-size: 0.8em;
+  line-height: 34px;
+  text-align: center;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.week-days .day-btn+.active {
+  color: white;
+  background: #D14937;
+}
+
+.week-days .day-btn:hover {
+  color: white;
+  background: #D14937;
+}
+
+.active-day {
+  font-size: 1.1em;
+  font-weight: 500;
+  margin: 20px 0;
+}
+
+.day-meal .header {
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.day-meal ul {
+  box-shadow: #EFEFEF 0 0 4px;
+  margin-bottom: 20px;
+}
+
+.day-meal ul li {
+  font-size: 0.7em;
+  font-weight: 300;
+  color: #1C1217;
+  display: block;
+}
+
+.day-meal .name {
+  float: left;
+}
+
+.day-meal .action {
+  float: right;
+  color: #D14937;
+}

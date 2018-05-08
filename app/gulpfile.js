@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var nodemon = require('gulp-nodemon');
+var babel = require('gulp-babel');
 
 // we'd need a slight delay to reload browsers
 // connected to browser-sync after restarting nodemon
@@ -12,8 +13,9 @@ gulp.task('nodemon', function(cb) {
   var called = false;
   return nodemon({
 
-      // nodemon our expressjs server
+      // nodemon our expressjs server using babel-node
       script: 'server.js',
+      exec: 'babel-node',
 
       // watch core server file(s) that require server restart on change
       watch: ['server.js']

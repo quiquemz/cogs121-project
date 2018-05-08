@@ -1,0 +1,182 @@
+<html !DOCTYPE>
+
+  <head>
+    <title>ReciPrep</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Contrail+One|Poppins:300,400,500,600,700" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" <!-- Bootstrap CSS CDN -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/calendar.css">
+
+  </head>
+
+  <body>
+
+    <div class="wrapper">
+
+      <!-- Header -->
+      <nav id="header">
+        <div class="r-btn left-header-btn open-sidebar-btn">
+          <i class="fa fa-bars"></i>
+        </div>
+        <div id="brand">
+          <h3>RECIPREP</h3>
+        </div>
+        <div class="r-btn right-header-btn add-recipe-btn">
+          <i class="fa fa-list-alt"></i>
+        </div>
+      </nav>
+
+      </nav>
+
+      <!-- Sidebar -->
+      <nav id="sidebar">
+        <div class="r-btn close-sidebar-btn">
+          <i class="fa fa-times"></i>
+        </div>
+        <!-- Sidebar Header -->
+        <div class="sidebar-header">
+          <div id="brand">
+            <h3>RECIPREP</h3>
+          </div>
+        </div>
+
+        <!-- Sidebar Links -->
+        <ul class="list-unstyled">
+          <li><a href="/">Discover</a></li>
+          <li class="active"><a href="#">Calendar</a></li>
+          <li><a href="#">Grocery List</a></li>
+          <li><a href="#">Favorites</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+          <ul class="list-unstyled">
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Sign Up</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Page Content -->
+      <div id="content">
+        <div class="container">
+
+          <div class="row week-slider">
+            <div class="col r-btn prev">
+              <i class="fa fa-angle-left"></i>
+            </div>
+            <div class="col-6 name">
+              <h5>This Week</h5>
+            </div>
+            <div class="col r-btn next">
+              <i class="fa fa-angle-right"></i>
+            </div>
+          </div>
+
+          <div class="row week-description">
+            <div class="start">
+              30 APR
+            </div>
+            <span class="dash"> - </span>
+            <div class="end">
+              6 MAY
+            </div>
+          </div>
+
+          <div class="row week-days">
+            <div class="day-btn">M</div>
+            <div class="day-btn active">T</div>
+            <div class="day-btn">W</div>
+            <div class="day-btn">T</div>
+            <div class="day-btn">F</div>
+            <div class="day-btn">S</div>
+            <div class="day-btn">S</div>
+          </div>
+
+          <hr>
+
+          <div class="active-day">
+            Tuesday
+          </div>
+
+          <div class="day-meal">
+            <ul class="list-group breakfast">
+              <li class="list-group-item header">
+                <div class="name">
+                  Breakfast
+                </div>
+                <div class="r-btn action">
+                  <i class="fa fa-plus"></i>
+                </div>
+              </li>
+            </ul>
+            <ul class="list-group lunch">
+              <li class="list-group-item header">
+                <div class="name">
+                  Lunch
+                </div>
+                <div class="r-btn action">
+                  <i class="fa fa-plus"></i>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="name">
+                  Chicken Noodle Soup
+                </div>
+                <div class="r-btn action">
+                  <i class="fa fa-ellipsis-h"></i>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="name">
+                  Fries
+                </div>
+                <div class="r-btn action">
+                  <i class="fa fa-ellipsis-h"></i>
+                </div>
+              </li>
+            </ul>
+            <ul class="list-group dinner">
+              <li class="list-group-item header">
+                <div class="name">
+                  Dinner
+                </div>
+                <div class="r-btn action">
+                  <i class="fa fa-plus"></i>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="name">
+                  Zucchini Noodles
+                </div>
+                <div class="r-btn action">
+                  <i class="fa fa-ellipsis-h"></i>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay"></div>
+
+    </div>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap Js CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/calendar.js"></script>
+  </body>
+
+</html>

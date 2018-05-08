@@ -1,6 +1,6 @@
 body {
   font-family: 'Poppins', sans-serif;
-  background: #FAFAFA;
+  background: #FDFDFD;
 }
 
 a, a:hover, a:focus {
@@ -17,7 +17,7 @@ ul {
   margin: 0;
 }
 
-h3 {
+h1, h2, h3, h4, h5 {
   margin: 0;
 }
 
@@ -54,18 +54,22 @@ p {
   z-index: 999;
 }
 
-#header .open-sidebar-btn {
+#header .left-header-btn {
   position: absolute;
   left: 20px;
   top: 15px;
   font-size: 1.3em;
 }
 
-#header .add-recipe-btn {
+#header .right-header-btn {
   position: absolute;
   right: 20px;
   top: 12px;
   font-size: 1.6em;
+}
+
+#content {
+  padding-top: 75px;
 }
 
 #sidebar {
@@ -84,7 +88,7 @@ p {
 
 #sidebar.active {
   margin-left: 0;
-  box-shadow: 2px 0 6px rgba(10, 10, 10, 0.4);
+  box-shadow: 0 0 4px rgba(10, 10, 10, 0.4);
 }
 
 #sidebar .sidebar-header {
@@ -126,20 +130,6 @@ p {
   position: absolute;
   left: 210px;
   top: 26px;
-}
-
-#content {
-  padding-top: 75px;
-}
-
-#content .search-recipe-btn {
-  background: #D14937;
-  color: #fff;
-  border: none;
-}
-
-#content .card {
-  margin-bottom: 20px;
 }
 
 .overlay {

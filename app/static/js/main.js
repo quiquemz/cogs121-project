@@ -17,4 +17,23 @@ $(document).ready(function() {
     $('.overlay').fadeOut();
   });
 
+  $('.search-recipe-btn').on('click', () => {
+
+    var filter = $('.search-box').val(); // get the value of the input, which we filter on
+
+    if (filter) {
+      const cards = $('.card-title');
+      cards.each((count, e) => {
+        if (e.textContent.toLowerCase().includes(filter)) {
+          $(e).parent().parent().show();
+        } else {
+          $(e).parent().parent().hide();
+        }
+
+      });
+    } else {
+      $('.card').show();
+    }
+  });
+
 });
