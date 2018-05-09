@@ -1,19 +1,11 @@
 'use strict';
 
-import * as admin from 'firebase-admin';
 import express from 'express';
 import http from 'http';
 import path from 'path';
 
 let app = express();
 let server = http.createServer(app);
-let serviceAccount = ('./serviceAccountKey.json');
-
-/************ FIREBASE ************/
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://getreciprep.firebaseio.com/'
-});
 
 /************** API **************/
 const recipeDatabase = {
