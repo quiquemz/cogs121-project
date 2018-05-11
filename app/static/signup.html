@@ -1,0 +1,66 @@
+<html !DOCTYPE>
+
+  <head>
+    <title>ReciPrep</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Contrail+One|Poppins:300,400,500,600,700" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <!-- Custom Common CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Custom Specific CSS -->
+    <link rel="stylesheet" href="css/signup.css">
+
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-app.js"></script>
+    <!-- Add additional services you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-database.js"></script>
+
+    <!-- Models -->
+    <script type="text/javascript" src="models/user.js"></script>
+    <script type="text/javascript" src="models/foodPreferences.js"></script>
+    <script type="text/javascript" src="models/calendar.js"></script>
+    <script type="text/javascript" src="models/groceries.js"></script>
+  </head>
+
+  <body>
+
+    <div class="wrapper">
+
+      <div id="content">
+        <div class="container">
+          <form id="signup-form">
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input id="email" class="form-control" type="email" name="email" aria-describedby="email-help" placeholder="Enter email">
+              <small id="email-help" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input id="password" class="form-control" type="password" name="password" aria-describedby="password-help" placeholder="Password">
+            </div>
+            <button id="signup-btn" type="submit" class="btn btn-primary">Sign Up</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap Js CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Firebase configuration -->
+    <script type="text/javascript" src="js/initFirebase.js"></script>
+    <script type="text/javascript" src="js/signup.js"></script>
+  </body>
+
+</html>

@@ -1,24 +1,22 @@
 $(document).ready(function() {
-  function addFoodItem(meal) {
-    const listItem = $(`<li class="list-group-item"></li>`);
-    const divName = $(`<div class="name">Fried Eggs</div>`);
-    const divAction = $(`<div class="r-btn food-options-btn action"><i class="fa fa-ellipsis-h"></i></div>`);
+  /*** Firebase Auth and DB ***/
+  const auth = firebase.auth();
+  const db = firebase.database();
 
-    $(`.list-${meal}`).append(
-      listItem.append(divName).append(divAction)
-    );
+  /*** Function definitions ***/
+  function addFoodItem(meal) {
+    const listItem =
+      `<li class="list-group-item">
+        <div class="name">Fried Eggs</div>
+        <div class="r-btn food-options-btn action"><i class="fa fa-ellipsis-h"></i></div>
+      </li>`
+
+    $(`.list-${meal}`).append(listItem);
   }
 
-  $('.add-breakfast-btn').on('click', function() {
-    addFoodItem('breakfast');
-  });
-
-  $('.add-lunch-btn').on('click', function() {
-    addFoodItem('lunch');
-  });
-
-  $('.add-dinner-btn').on('click', function() {
-    addFoodItem('dinner');
-  });
+  /*** Event Handlers ***/
+  $('.add-breakfast-btn').on('click', () => addFoodItem('breakfast'));
+  $('.add-lunch-btn').on('click', () => addFoodItem('lunch'));
+  $('.add-dinner-btn').on('click', () => addFoodItem('dinner'));
 
 });
