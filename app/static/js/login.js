@@ -18,13 +18,14 @@ $(document).ready(function() {
       })
       .catch(e => {
         console.log(e);
+        alert(e.message);
         // TODO Handle errors
         // TODO Prompt user with error
       });
   }
 
   /*** Event Handlers ***/
-  $('#login-form').on('submit', (e) => {
+  $('#email-login-form').on('submit', (e) => {
     e.preventDefault();
     login(e);
   });

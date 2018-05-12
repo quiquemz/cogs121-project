@@ -25,13 +25,14 @@ $(document).ready(function() {
       })
       .catch(e => {
         console.log(e);
+        alert(e.message);
         // TODO Handle errors
         // TODO Prompt user with error
       });
   }
 
   /*** Event Handlers ***/
-  $('#signup-form').on('submit', (e) => {
+  $('#email-signup-form').on('submit', (e) => {
     e.preventDefault();
     signup(e);
   });
