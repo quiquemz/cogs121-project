@@ -6,8 +6,8 @@ $(document).ready(function() {
     switch (location) {
       case '/':
         $('#header').css('background', '#FFF').css('color', '#363046');
-        $('.left-header-btn').css('color', '#363046');
-        $('.right-header-btn').css('color', '#363046').append('<i class="fa fa-undo-alt"></i>');
+        $('.left-header-btn');
+        $('.right-header-btn').append('<i class="fa fa-undo-alt"></i>');
         break;
       case '/calendar':
         $('#header').css('background', '#363046').css('color', '#FFF');
