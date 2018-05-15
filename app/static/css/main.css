@@ -42,5 +42,6 @@ p {
 }
 
 #content {
-  padding-top: 75px;
+  padding: 82px 0 0;
+  height: 100%;
 }

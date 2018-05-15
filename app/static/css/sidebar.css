@@ -2,7 +2,7 @@
   min-width: 250px;
   max-width: 250px;
   height: 100vh;
-  background: #D14937;
+  background: #363046;
   color: #fff;
   margin-left: -250px;
   position: fixed;
@@ -18,7 +18,7 @@
 }
 
 #sidebar .sidebar-header {
-  background: #D14937;
+  background: #363046;
   padding: 20px 15px;
   border-bottom: rgba(255, 255, 255, 0.4) solid 1px;
 }
@@ -43,12 +43,12 @@
 }
 
 #sidebar ul li a:hover {
-  color: #D14937;
+  color: #363046;
   background: #fff;
 }
 
 #sidebar ul li.active>a, a[aria-expanded="true"] {
-  color: #D14937;
+  color: #363046;
   background-color: white;
 }
 

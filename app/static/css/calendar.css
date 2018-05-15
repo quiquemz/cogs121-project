@@ -4,7 +4,7 @@ hr {
 
 .week-slider .prev {
   text-align: left;
-  color: #D14937;
+  color: #363046;
   font-size: 1.5em;
 }
 
@@ -14,7 +14,7 @@ hr {
 
 .week-slider .next {
   text-align: right;
-  color: #D14937;
+  color: #363046;
   font-size: 1.5em;
 }
 
@@ -50,12 +50,12 @@ hr {
 
 .week-days .day-btn+.active {
   color: white;
-  background: #D14937;
+  background: #363046;
 }
 
 .week-days .day-btn:hover {
   color: white;
-  background: #D14937;
+  background: #363046;
 }
 
 .active-day {
@@ -87,5 +87,5 @@ hr {
 
 .day-meal .action {
   float: right;
-  color: #D14937;
+  color: #363046;
 }

@@ -39,13 +39,13 @@
 
       <!-- Header -->
       <nav id="header">
-        <div class="r-btn left-header-btn open-sidebar-btn">
+        <div class="r-btn header-btn left-header-btn open-sidebar-btn">
           <i class="fa fa-bars"></i>
         </div>
         <div id="brand">
           <h3>RECIPREP</h3>
         </div>
-        <div class="r-btn right-header-btn add-recipe-btn">
+        <div class="r-btn header-btn right-header-btn add-recipe-btn">
           <!-- Added dynamically in header.js -->
         </div>
       </nav>
@@ -88,34 +88,36 @@
       <!-- Page Content -->
       <div id="content">
         <div class="container">
-
-          <!-- Search input -->
-          <div class="input-group mb-3">
-            <input type="text" class="form-control search-box" placeholder="Search for a recipe" aria-label="searched recipe" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn search-recipe-btn" type="button">Search</button>
-            </div>
-          </div>
-
-          <!-- Recipe cards -->
-          <div class="row cards-deck">
-            <div class="col-sm-6 col-md-4">
-              <div class="card">
-                <img class="card-img-top" src="images/recipe1.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Recipe Example</h5>
-                  <p class="card-text">This Recipe Card is for documentation. It is to be used as a base for further html/css construction.</p>
-                </div>
-                <div class="card-footer">
-                  <span class="card-text float-left">25 mins</span>
-                  <div class="r-btn close-sidebar-btn float-right">
-                    <i class="fa fa-star"></i>
+          <div class="r-card-container">
+            <div class="r-card">
+              <div class="r-card-content">
+                <div class="r-card-main-content">
+                  <h5 class="r-card-title">Card title</h5>
+                  <div class="r-btn">
+                    <i class="fa fa-info-circle"></i>
                   </div>
+                </div>
+                <div class="r-card-secondary-content">
+                  <span class="r-card-text">American, Belgian</span>
+                  <span class="r-card-text">25 mins</span>
                 </div>
               </div>
             </div>
           </div>
+          <div class="footer">
+
+            <div class="r-btn footer-btn">
+              <i class="fa fa-times"></i>
+            </div>
+            <div class="r-btn footer-btn">
+              <i class="fa fa-calendar-alt"></i>
+            </div>
+            <div class="r-btn footer-btn">
+              <i class="fa fa-star"></i>
+            </div>
+          </div>
         </div>
+
       </div>
 
       <div class="overlay"></div>

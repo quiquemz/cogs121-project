@@ -1,9 +1,74 @@
-#content .search-recipe-btn {
-  background: #D14937;
-  color: #fff;
-  border: none;
+#content .container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 600px;
+  margin: auto;
 }
 
-#content .card {
-  margin-bottom: 20px;
+#content .r-card-container {
+  flex: 1;
+  position: relative;
+  height: 100%;
+}
+
+#content .r-card {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  color: #FFF;
+  box-shadow: 0 0 1px rgba(10, 10, 10, 0.4);
+  border-radius: 8px;
+  background: url('../images/recipe2.jpg') center no-repeat, linear-gradient(rgba(255, 255, 255, 0) 86%, #444);
+  background-blend-mode: multiply;
+  background-size: auto 100%;
+}
+
+#content .r-card .r-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+#content .r-card .r-card-main-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+#content .r-card .r-card-secondary-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px 16px;
+}
+
+#content .footer {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  width: 100%;
+  margin: 30px auto;
+}
+
+#content .footer-btn {
+  border-radius: 50%;
+  border: solid 1px #DDD;
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  padding-top: 14px;
+  margin: 0 auto;
+}
+
+#content .footer-btn .fa-times {
+  color: #EB5757;
+}
+
+#content .footer-btn .fa-calendar-alt {
+  color: #6FCCDF;
+}
+
+#content .footer-btn .fa-star {
+  color: #F4BD46;
 }
