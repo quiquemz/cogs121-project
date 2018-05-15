@@ -35,6 +35,11 @@ p {
 .r-btn {
   /* for icon buttons */
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.r-btn:hover {
+  transform: scale(1.2);
 }
 
 #brand {

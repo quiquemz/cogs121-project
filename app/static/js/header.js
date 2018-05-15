@@ -1,11 +1,14 @@
 $(document).ready(function() {
 
   // Function definitions
-  function initializeHeader(location) {
+  function getCleanCurrentPage() {
+    return window.location.pathname.replace('.html', '')
+  }
 
+  function initializeHeader(location) {
     switch (location) {
       case '/':
-        $('#header').css('background', '#FFF').css('color', '#363046');
+        $('#header').css('background', '#FDFDFD').css('color', '#363046');
         $('.left-header-btn');
         $('.right-header-btn').append('<i class="fa fa-undo-alt"></i>');
         break;
@@ -23,5 +26,5 @@ $(document).ready(function() {
   }
 
   // Plain Function Invokations
-  initializeHeader(window.location.pathname.replace('.html', ''));
+  initializeHeader(getCleanCurrentPage());
 });

@@ -19,4 +19,8 @@ $(document).ready(function() {
   $('.add-lunch-btn').on('click', () => addFoodItem('lunch'));
   $('.add-dinner-btn').on('click', () => addFoodItem('dinner'));
 
+  $('.day-btn').on('click', (e) => {
+    $('.week-days').find('.active').removeClass('active');
+    $(e.target).addClass('active');
+  })
 });

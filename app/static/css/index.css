@@ -106,10 +106,6 @@
   margin: 0 auto;
 }
 
-#content .footer-btn:hover {
-  transform: scale(1.2);
-}
-
 #content .footer-btn .fa-times {
   color: #EB5757;
 }

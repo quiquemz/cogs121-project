@@ -3,12 +3,23 @@
 import express from 'express';
 import http from 'http';
 import path from 'path';
+import * as firebase from 'firebase-admin';
 
-let app = express();
-let server = http.createServer(app);
+const app = express();
+const server = http.createServer(app);
+
+/************** Firebase setup **************/
+// const serviceAccount = require('./serviceAccountKey.json');
+//
+// firebase.initializeApp({
+//   credential: firebase.credential.cert(serviceAccount),
+//   databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
+// });
 
 /************** Routes **************/
-app.get('/', (req, res) => res.sendfile('static/index.html'));
+app.get('/', (req, res) => {
+  res.sendfile('static/index.html');
+});
 
 app.get('/login', (req, res) => res.sendfile('static/login.html'));
 

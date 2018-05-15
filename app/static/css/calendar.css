@@ -48,7 +48,7 @@ hr {
   cursor: pointer;
 }
 
-.week-days .day-btn+.active {
+.week-days .active {
   color: white;
   background: #363046;
 }
