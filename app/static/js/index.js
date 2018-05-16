@@ -65,29 +65,30 @@ $(document).ready(() => {
   }
 
   function slideCard(direction) {
-    $('.r-card:last-child').addClass('r-card-out');	
+    const user = auth.currentUser;
+    $('.r-card:last-child').addClass('r-card-out');
 
-    switch (direction) {
-      case 0:
-        $('.r-card:last-child').addClass('r-card-out-rl');
-        break;
-      case 1:
-        $('.r-card:last-child').addClass('r-card-out-bu');
-        break;
-      case 2:
-        $('.r-card:last-child').addClass('r-card-out-lr');
-        firebase.auth().onAuthStateChanged((user) => {
-		  if (user) {
-		  	db.ref('users/' + user.uid).child('favoriteRecipes').push({'recipeName': 'link'});
-		  }
-		});
-        break;
-      default:
+    if (user) {
+      switch (direction) {
+        case 0:
+          $('.r-card:last-child').addClass('r-card-out-rl');
+          break;
+        case 1:
+          $('.r-card:last-child').addClass('r-card-out-bu');
+          break;
+        case 2:
+          $('.r-card:last-child').addClass('r-card-out-lr');
+          if (user) {
+            db.ref('users/' + user.uid).child('favoriteRecipes').push({
+              'recipeName': 'link'
+            });
+          }
+          break;
+        default:
+      };
     }
     $('.r-card:last-child').on('transitionend', (el) => removeCard(el));
-
     getRandomRecipes(auth.currentUser, 1);
-
   }
 
   /*** Get initial "random" recipes ***/
