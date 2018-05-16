@@ -27,22 +27,22 @@
   background: url('../images/recipe2.jpg') center no-repeat, linear-gradient(rgba(255, 255, 255, 0) 65%, #888);
   background-blend-mode: multiply;
   background-size: auto 100%;
-  transition: all 0.4s;
+  transition: all 0.5s;
 }
 
 #content .r-card-out-rl {
   /* from left to right */
-  left: -120%;
+  left: -300%;
 }
 
 #content .r-card-out-bu {
   /* from bottom to up */
-  top: -120%;
+  top: -300%;
 }
 
 #content .r-card-out-lr {
   /* from left to right */
-  left: 120%;
+  right: -300%;
 }
 
 #content .r-card .r-card-content {
