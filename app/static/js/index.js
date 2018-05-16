@@ -68,24 +68,27 @@ $(document).ready(() => {
     const user = auth.currentUser;
     $('.r-card:last-child').addClass('r-card-out');
 
-    if (user) {
-      switch (direction) {
-        case 0:
-          $('.r-card:last-child').addClass('r-card-out-rl');
-          break;
-        case 1:
-          $('.r-card:last-child').addClass('r-card-out-bu');
-          break;
-        case 2:
-          $('.r-card:last-child').addClass('r-card-out-lr');
+    switch (direction) {
+      case LEFT:
+        $('.r-card:last-child').addClass('r-card-out-rl');
+        break;
+      case UP:
+        $('.r-card:last-child').addClass('r-card-out-bu');
+        break;
+      case RIGHT:
+        $('.r-card:last-child').addClass('r-card-out-lr');
+        firebase.auth().onAuthStateChanged((user) => {
           if (user) {
-            db.ref('users/' + user.uid).child('favoriteRecipes').push({
-              'recipeName': 'link'
-            });
+            var recipeName = $('.r-card:last-child').data('recipe').title;
+            var sourceUrl = $('.r-card:last-child').data('recipe').sourceUrl;
+            var obj = {
+              [recipeName]: sourceUrl
+            };
+            db.ref('users/' + user.uid).child('favoriteRecipes').push(obj);
           }
-          break;
-        default:
-      };
+        });
+        break;
+      default:
     }
     $('.r-card:last-child').on('transitionend', (el) => removeCard(el));
     getRandomRecipes(auth.currentUser, 1);
