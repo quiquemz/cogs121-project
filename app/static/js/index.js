@@ -78,7 +78,10 @@ $(document).ready(() => {
         $('.r-card:last-child').addClass('r-card-out-lr');
         firebase.auth().onAuthStateChanged((user) => {
 		  if (user) {
-		  	db.ref('users/' + user.uid).child('favoriteRecipes').push({'recipeName': 'link'});
+		  	var recipeName = $('.r-card:last-child').data('recipe').title;
+		  	var sourceUrl = $('.r-card:last-child').data('recipe').sourceUrl;
+		  	var obj = {[recipeName]: sourceUrl};
+		  	db.ref('users/' + user.uid).child('favoriteRecipes').push(obj);
 		  }
 		});
         break;
