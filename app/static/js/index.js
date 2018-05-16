@@ -65,7 +65,8 @@ $(document).ready(() => {
   }
 
   function slideCard(direction) {
-    $('.r-card:last-child').addClass('r-card-out');
+    $('.r-card:last-child').addClass('r-card-out');	
+
     switch (direction) {
       case 0:
         $('.r-card:last-child').addClass('r-card-out-rl');
@@ -75,6 +76,11 @@ $(document).ready(() => {
         break;
       case 2:
         $('.r-card:last-child').addClass('r-card-out-lr');
+        firebase.auth().onAuthStateChanged((user) => {
+		  if (user) {
+		  	db.ref('users/' + user.uid).child('favoriteRecipes').push({'recipeName': 'link'});
+		  }
+		});
         break;
       default:
     }
