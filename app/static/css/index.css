@@ -30,17 +30,17 @@
   transition: all 0.5s;
 }
 
-#content .r-card-out-rl {
-  /* from left to right */
+#content .r-card-out-left {
+  /* from right to left */
   left: -300%;
 }
 
-#content .r-card-out-bu {
+#content .r-card-out-top {
   /* from bottom to up */
   top: -300%;
 }
 
-#content .r-card-out-lr {
+#content .r-card-out-right {
   /* from left to right */
   right: -300%;
 }

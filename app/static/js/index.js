@@ -1,7 +1,7 @@
 $(document).ready(() => {
   /*** Constants & global variables ***/
   const LEFT = 0;
-  const UP = 1;
+  const TOP = 1;
   const RIGHT = 2;
 
   /*** Firebase Auth and DB ***/
@@ -41,7 +41,7 @@ $(document).ready(() => {
             </div>
           </div>
           <div class="r-card-secondary-content">
-            <span class="r-card-text">${recipe.cuisines.join(', ')}</span>
+            <span class="r-card-text">${recipe.cuisines.concat(recipe.diets).join(', ')}</span>
             <div class="r-card-time">
               <div class="clock-icon">
                 <i class="far fa-clock"></i>
@@ -53,9 +53,12 @@ $(document).ready(() => {
       </div>`);
 
     if (recipe.image) {
+      console.log(recipe);
       card.css('background', `url(${recipe.image}) ${backgroundCSS}`);
       card.css('background-size', backgroundSizeCSS);
-      card.data('recipe', recipe);
+      card.data('recipeTitle', recipe.title);
+      card.data('recipeSourceUrl', recipe.sourceUrl);
+      card.data('recipeId', recipe.id);
       $('.r-cards-container').prepend(card);
     }
   }
@@ -64,29 +67,31 @@ $(document).ready(() => {
     $(el.target).remove();
   }
 
+  function addToFavorites() {
+    if (auth.currentUser) {
+      const recipeTitle = $('.r-card:last-child').data('recipeTitle');
+      const recipeId = $('.r-card:last-child').data('recipeId');
+
+      db.ref('users/' + auth.currentUser.uid).child('favoriteRecipes').update({
+        [recipeId]: recipeTitle
+      });
+    }
+  }
+
   function slideCard(direction) {
     const user = auth.currentUser;
     $('.r-card:last-child').addClass('r-card-out');
 
     switch (direction) {
       case LEFT:
-        $('.r-card:last-child').addClass('r-card-out-rl');
+        $('.r-card:last-child').addClass('r-card-out-left');
         break;
-      case UP:
-        $('.r-card:last-child').addClass('r-card-out-bu');
+      case TOP:
+        $('.r-card:last-child').addClass('r-card-out-top');
         break;
       case RIGHT:
-        $('.r-card:last-child').addClass('r-card-out-lr');
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            var recipeName = $('.r-card:last-child').data('recipe').title;
-            var sourceUrl = $('.r-card:last-child').data('recipe').sourceUrl;
-            var obj = {
-              [recipeName]: sourceUrl
-            };
-            db.ref('users/' + user.uid).child('favoriteRecipes').push(obj);
-          }
-        });
+        $('.r-card:last-child').addClass('r-card-out-right');
+        addToFavorites();
         break;
       default:
     }
@@ -99,6 +104,6 @@ $(document).ready(() => {
 
   /*** Event Handlers ***/
   $('.next-btn').on('click', () => slideCard(LEFT));
-  $('.calendar-btn').on('click', () => slideCard(UP));
+  $('.calendar-btn').on('click', () => slideCard(TOP));
   $('.favorites-btn').on('click', () => slideCard(RIGHT));
 });
