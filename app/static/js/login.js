@@ -17,7 +17,6 @@ $(document).ready(function() {
         // TODO Prompt user that he/she succesfully logged in
       })
       .catch(e => {
-        console.log(e);
         alert(e.message);
         // TODO Handle errors
         // TODO Prompt user with error

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   // Function definitions
-  function getCleanCurrentPage() {
+  function getCurrentPage() {
     return window.location.pathname.replace('.html', '')
   }
 
@@ -11,6 +11,12 @@ $(document).ready(function() {
         $('#header').css('background', '#FDFDFD').css('color', '#363046');
         $('.left-header-btn');
         $('.right-header-btn').append('<i class="fa fa-undo-alt"></i>');
+        break;
+      case '/login':
+      case '/signup':
+        $('#header').css('background', '#FDFDFD');
+        $('h5').css('color', '#363046').css('font-weight', '100');
+        $('.left-header-btn').append('<i class="fa fa-chevron-left"></i>').css('color', '#363046');
         break;
       case '/calendar':
         $('#header').css('background', '#363046').css('color', '#FFF');
@@ -26,5 +32,5 @@ $(document).ready(function() {
   }
 
   // Plain Function Invokations
-  initializeHeader(getCleanCurrentPage());
+  initializeHeader(getCurrentPage());
 });

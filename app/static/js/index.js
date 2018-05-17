@@ -53,12 +53,12 @@ $(document).ready(() => {
       </div>`);
 
     if (recipe.image) {
-      console.log(recipe);
       card.css('background', `url(${recipe.image}) ${backgroundCSS}`);
       card.css('background-size', backgroundSizeCSS);
       card.data('recipeTitle', recipe.title);
       card.data('recipeSourceUrl', recipe.sourceUrl);
       card.data('recipeId', recipe.id);
+
       $('.r-cards-container').prepend(card);
     }
   }
@@ -72,9 +72,11 @@ $(document).ready(() => {
       const recipeTitle = $('.r-card:last-child').data('recipeTitle');
       const recipeId = $('.r-card:last-child').data('recipeId');
 
-      db.ref('users/' + auth.currentUser.uid).child('favoriteRecipes').update({
-        [recipeId]: recipeTitle
-      });
+      db.ref('users/' + auth.currentUser.uid)
+        .child('favoriteRecipes')
+        .update({
+          [recipeId]: recipeTitle
+        });
     }
   }
 
@@ -88,6 +90,7 @@ $(document).ready(() => {
         break;
       case TOP:
         $('.r-card:last-child').addClass('r-card-out-top');
+        // TODO add to calendar
         break;
       case RIGHT:
         $('.r-card:last-child').addClass('r-card-out-right');
