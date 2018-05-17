@@ -2,20 +2,22 @@ hr {
   margin: 20px 0 0 0;
 }
 
-.week-slider .prev {
+.week-slider .prev-week-btn {
   text-align: left;
   color: #363046;
   font-size: 1.5em;
+  cursor: pointer;
 }
 
-.week-slider .name {
+.week-slider .week-name {
   text-align: center;
 }
 
-.week-slider .next {
+.week-slider .next-week-btn {
   text-align: right;
   color: #363046;
   font-size: 1.5em;
+  cursor: pointer;
 }
 
 .week-description {
@@ -24,11 +26,11 @@ hr {
   color: #AAA;
 }
 
-.week-description .start {
+.week-description .week-start-day {
   margin: 0 5px 0 auto;
 }
 
-.week-description .end {
+.week-description .week-end-day {
   margin: 0 auto 0 5px;
 }
 

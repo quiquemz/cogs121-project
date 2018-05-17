@@ -105,18 +105,18 @@
                 <div class="modal-body">
 
                   <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
                           <button class="btn btn-default" type="button">Go!</button>
                         </span>
                   </div>
 
                   <div class="help-block"> &nbsp; </div>
 
-                    <ul class="list-group" id="myModalList">
-                      
-                      
-                    </ul>
+                  <ul class="list-group" id="myModalList">
+
+
+                  </ul>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-primary">Add Food</button>
@@ -126,47 +126,40 @@
           </div>
 
           <div class="row week-slider">
-            <div class="col prev">
-              <div class="r-btn">
-                <i class="fa fa-angle-left"></i>
-              </div>
+            <div class="col prev-week-btn">
+              <i class="fa fa-angle-left"></i>
             </div>
-            <div class="col-6 name">
-              <h5>This Week</h5>
+            <div class="col-6 week-name">
             </div>
-            <div class="col next">
-              <div class="r-btn">
-                <i class="fa fa-angle-right"></i>
-              </div>
+            <div class="col next-week-btn">
+              <i class="fa fa-angle-right"></i>
             </div>
 
           </div>
 
           <div class="row week-description">
-            <div class="start">
-              30 APR
+            <div class="week-start-day">
+              <!-- Dynamically set -->
             </div>
             <span class="dash"> - </span>
-            <div class="end">
-              6 MAY
+            <div class="week-end-day">
+              <!-- Dynamically set -->
             </div>
           </div>
 
           <div class="row week-days">
-            <div id="monday" class="r-btn day-btn">M</div>
-            <div id="tuesday" class="r-btn day-btn active">T</div>
-            <div id="wednesday" class="r-btn day-btn">W</div>
-            <div id="thursday" class="r-btn day-btn">T</div>
-            <div id="friday " class="r-btn day-btn">F</div>
-            <div id="saturday" class="r-btn day-btn">S</div>
-            <div id="sunday" class="r-btn day-btn">S</div>
+            <div id="Monday" class="r-btn day-btn">M</div>
+            <div id="Tuesday" class="r-btn day-btn">T</div>
+            <div id="Wednesday" class="r-btn day-btn">W</div>
+            <div id="Thursday" class="r-btn day-btn">T</div>
+            <div id="Friday" class="r-btn day-btn">F</div>
+            <div id="Saturday" class="r-btn day-btn">S</div>
+            <div id="Sunday" class="r-btn day-btn">S</div>
           </div>
 
           <hr>
 
-          <div class="active-day">
-            Tuesday
-          </div>
+          <div class="active-day"></div>
 
           <div class="day-meal">
             <ul class="list-group list-breakfast">
@@ -188,22 +181,6 @@
                   <i class="fa fa-plus"></i>
                 </div>
               </li>
-              <li class="list-group-item">
-                <div class="name">
-                  Chicken Noodle Soup
-                </div>
-                <div class="r-btn action">
-                  <i class="fa fa-ellipsis-h"></i>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <div class="name">
-                  Fries
-                </div>
-                <div class="r-btn action">
-                  <i class="fa fa-ellipsis-h"></i>
-                </div>
-              </li>
             </ul>
             <ul class="list-group list-dinner">
               <li class="list-group-item header">
@@ -214,14 +191,6 @@
                   <i class="fa fa-plus"></i>
                 </div>
               </li>
-              <li class="list-group-item">
-                <div class="name">
-                  Zucchini Noodles
-                </div>
-                <div class="r-btn action">
-                  <i class="fa fa-ellipsis-h"></i>
-                </div>
-              </li>
             </ul>
           </div>
         </div>
@@ -229,18 +198,16 @@
 
       <!-- Sidebar Overlay -->
       <div class="overlay"></div>
-
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-
-    <!-- Bootstrap Js CDN -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-
-    <!-- Firebase configuration and management -->
-    <script type="text/javascript" src="js/initFirebase.js"></script>
-    <script type="text/javascript" src="js/header.js"></script>
-    <script type="text/javascript" src="js/sidebar.js"></script>
-    <script type="text/javascript" src="js/calendar.js"></script>
+      <!-- jQuery CDN -->
+      <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+      <!-- Bootstrap Js CDN -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+      <!-- Firebase configuration and management -->
+      <script type="text/javascript" src="js/initFirebase.js"></script>
+      <script type="text/javascript" src="js/header.js"></script>
+      <script type="text/javascript" src="js/sidebar.js"></script>
+      <script type="text/javascript" src="js/calendar.js"></script>
 
   </body>
 

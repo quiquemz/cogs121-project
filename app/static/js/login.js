@@ -5,7 +5,9 @@ $(document).ready(function() {
   const db = firebase.database();
 
   /*** Function definitions ***/
-  function login() {
+  function login(e) {
+    e.preventDefault();
+
     const username = $('#username').val()
     const email = $('#email').val();
     const password = $('#password').val();
@@ -24,9 +26,6 @@ $(document).ready(function() {
   }
 
   /*** Event Handlers ***/
-  $('#email-login-form').on('submit', (e) => {
-    e.preventDefault();
-    login(e);
-  });
+  $('#email-login-form').on('submit', (e) => login(e));
 
 });
