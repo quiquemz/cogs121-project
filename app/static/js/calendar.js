@@ -45,10 +45,10 @@ $(document).ready(function() {
     $('.week-end-day').html(cmCopy.isoWeekday(7).format(WEEK_DESCRIPTION));
   }
 
-  function setCurrentWeekDay(evnt) {
+  function setCurrentWeekDay(e) {
     // set the current moment from evnt
-    if (evnt) {
-      currentMoment.isoWeekday($(evnt.target).attr('id'));
+    if (e) {
+      currentMoment.isoWeekday($(e.target).attr('id'));
     }
 
     // Change the active week day row (e.g. M, T, W, etc.)
@@ -68,7 +68,6 @@ $(document).ready(function() {
       </li>`
 
     $(`.list-${meal}`).append(listItem);
-    $('#myModal').modal('toggle');
   }
 
   function getCalendarFromDB() {
@@ -90,38 +89,23 @@ $(document).ready(function() {
     }
   }
 
-  function addRecipeItemToDB(id, recipeObj, mealType) {
-    var date = $(currentMoment.format(DB_DATE)).selector;
-    db.ref('users/' + auth.currentUser.uid)
-                .child('calendar')
-                .child(date)
-                .child(mealType)
-                .update({
-                  [id]: recipeObj[id]
-                });
-    $('#myModal').modal('toggle');
-  }
-
-  function getFavoriteRecipesFromDB(mealType) {
+  function getFavoriteRecipesFromDB(type) {
     if (auth.currentUser) {
       $('#myModalList').empty();
 
       // Get user database snapshot
       db.ref(`/users/${auth.currentUser.uid}/favoriteRecipes`).once("value", res => {
         const recipes = res.val();
-        if (recipes) {
-          // Iterate through favorite recipes and add to array
-          Object.keys(recipes).forEach(id => {
-              $('#myModalList').append(`<li class="list-group-item" id="${id}">${recipes[id]}</li>`);
-              $('#' + id).on('click', () => addRecipeItemToDB(id, recipes, mealType));
-            });
-        }
-        else {
-          $('.input-group').hide();
-          $('#myModalList').append(`You have no favorite recipes`);
-        }
+
+        // Iterate through favorite recipes and add to array
+        Object.keys(recipes).forEach(id => {
+          $('#myModalList').append(`<li class="list-group-item" id="${id}">${recipes[id]}</li>`);
+          $('#' + id).on('click', () => {
+            addRecipeItem(type, recipes[id]);
+            $('#myModal').modal('toggle');
+          });
+        })
       });
-      $('#myModal').modal('toggle');
     }
   }
 
@@ -134,6 +118,7 @@ $(document).ready(function() {
   function toggleModal(type) {
     // Get user's favorite recipes
     getFavoriteRecipesFromDB(type);
+    $('#myModal').modal('toggle');
   }
 
   /*** Initializers ***/
@@ -151,7 +136,5 @@ $(document).ready(function() {
   $('.prev-week-btn').on('click', () => setWeek('prev'));
   $('.next-week-btn').on('click', () => setWeek('next'));
 
-  $('.day-btn').on('click', (evnt) => setCurrentWeekDay(evnt));
-
-  $('#calendar-discover-more').on('click', () => { window.location.href = 'index.html' });
+  $('.day-btn').on('click', (e) => setCurrentWeekDay(e));
 });

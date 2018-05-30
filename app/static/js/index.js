@@ -8,13 +8,6 @@ $(document).ready(() => {
   const auth = firebase.auth();
   const db = firebase.database();
 
-
-  $('#datetimepicker12').datetimepicker({
-      inline: true, 
-      sideBySide: true,
-      format: 'DD/MM/YYYY'
-  });
-
   /*** Function definitions ***/
   function getRandomRecipes(user, ammount) {
     const URL = `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=${ammount}`;
@@ -74,11 +67,15 @@ $(document).ready(() => {
     }
   }
 
-  function removeCard(el) {
-    $(el.target).remove();
+  function removeLastCard(el) {
+    if (el) {
+      $(el.target).remove();
+    } else {
+      $('.r-card:last-child').remove();
+    }
   }
 
-  function addToFavorites() {
+  function addToFavoritesDB() {
     if (auth.currentUser) {
       const recipeTitle = $('.r-card:last-child').data('recipeTitle');
       const recipeId = $('.r-card:last-child').data('recipeId');
@@ -98,20 +95,24 @@ $(document).ready(() => {
     switch (direction) {
       case LEFT:
         $('.r-card:last-child').addClass('r-card-out-left');
+        // NOTE: Wait till transition ends to delete it
+        $('.r-card:last-child').on('transitionend', (el) => removeLastCard(el));
         break;
       case TOP:
         $('.r-card:last-child').addClass('r-card-out-top');
-        setTimeout(toggleModal("open"), 100);
+        // NOTE: Wait till transition ends to open modal it
+        $('.r-card:last-child').on('transitionend', (el) => toggleModal("open"));
         break;
       case RIGHT:
         $('.r-card:last-child').addClass('r-card-out-right');
-        addToFavorites();
+        // NOTE: Wait till transition ends to delete it
+        $('.r-card:last-child').on('transitionend', (el) => removeLastCard(el));
+        addToFavoritesDB();
         break;
       default:
     }
 
-    // NOTE: Wait till transition ends to delete it
-    $('.r-card:last-child').on('transitionend', (el) => removeCard(el));
+
     getRandomRecipes(auth.currentUser, 1);
   }
 
@@ -143,7 +144,6 @@ $(document).ready(() => {
 	        })
 	    };
   	}
-  	
     $('#myModal').modal('toggle');
   }
 
@@ -151,8 +151,17 @@ $(document).ready(() => {
   getRandomRecipes(true, 10);
 
   /*** Event Handlers ***/
+  $('#datetimepicker12').datetimepicker({
+    inline: true,
+    sideBySide: true,
+    format: 'DD/MM/YYYY'
+  });
   $('.next-btn').on('click', () => slideCard(LEFT));
   $('.calendar-btn').on('click', () => slideCard(TOP));
   $('.favorites-btn').on('click', () => slideCard(RIGHT));
-  $('#save-calendar').on('click', () => toggleModal("close"));
+  $('#save-calendar').on('click', () => {
+    toggleModal("close");
+    removeLastCard();
+  });
+
 });

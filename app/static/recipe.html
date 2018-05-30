@@ -18,7 +18,6 @@
     <!-- Custom Common CSS -->
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/sidebar.css">
     <!-- Custom Specific CSS -->
     <link rel="stylesheet" href="../css/recipe.css">
 
@@ -27,6 +26,11 @@
     <!-- Add additional services you want to use -->
     <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-database.js"></script>
+
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Numeric JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
 
     <!-- Models -->
     <script type="text/javascript" src="../models/user.js"></script>
@@ -41,46 +45,13 @@
 
       <!-- Header -->
       <nav id="header">
-        <div class="r-btn header-btn left-header-btn open-sidebar-btn">
-          <i class="fa fa-bars"></i>
+        <div class="r-btn header-btn left-header-btn">
+          <a href="/">
+            <i class="fa fa-arrow-circle-left"></i>
+          </a>
         </div>
         <div id="brand">
           <h3>RECIPREP</h3>
-        </div>
-      </nav>
-
-      <!-- Sidebar -->
-      <nav id="sidebar">
-        <div class="r-btn close-sidebar-btn">
-          <i class="fa fa-times"></i>
-        </div>
-        <!-- Sidebar Header -->
-        <div class="sidebar-header">
-          <div id="brand">
-            <h3>RECIPREP</h3>
-          </div>
-        </div>
-
-        <!-- Sidebar Links -->
-        <ul class="list-unstyled">
-          <li><a href="/">Discover</a></li>
-          <li><a href="/calendar">Calendar</a></li>
-          <li><a href="#">Grocery List</a></li>
-          <li><a href="#">Favorites</a></li>
-        </ul>
-
-        <div class="sidebar-footer">
-          <ul class="list-unstyled">
-            <li id="login-btn">
-              <a href="login">Login</a>
-            </li>
-            <li id="signup-btn">
-              <a href="signup">Sign Up</a>
-            </li>
-            <li id="logout-btn">
-              <a href="#">Logout</a>
-            </li>
-          </ul>
         </div>
       </nav>
 
@@ -96,6 +67,8 @@
             <h5>Instructions</h5>
           </div>
         </div>
+
+        <div id="nutrition-chart"></div>
       </div>
 
       <div class="overlay"></div>
@@ -109,7 +82,6 @@
     <!-- Firebase configuration and management -->
     <script type="text/javascript" src="../js/initFirebase.js"></script>
     <script type="text/javascript" src="../js/header.js"></script>
-    <script type="text/javascript" src="../js/sidebar.js"></script>
     <script type="text/javascript" src="../js/recipe.js"></script>
   </body>
 
