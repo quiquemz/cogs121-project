@@ -27,6 +27,7 @@ $(document).ready(() => {
   }
 
   function createRecipeImageCard(recipe) {
+    getNutritionInfo(recipe.id);
     const backgroundCSS = 'center no-repeat, linear-gradient(rgba(255, 255, 255, 0) 40%, #777)';
     const backgroundSizeCSS = 'auto';
     const imageCard = $(
@@ -73,6 +74,44 @@ $(document).ready(() => {
       });
     });
     $('.instructions').append(ol)
+  }
+
+function getNutritionInfo(recipeId) {
+    
+    $.ajax({
+      url: `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${recipeId}/information?includeNutrition=true`,
+      type: 'GET',
+      dataType: 'json',
+      headers: {
+        'X-Mashape-Key': 'fE0JDoXOrQmshCwRo1DwJRH2XhXKp1YnYEAjsnBx1IKReJz2Bv'
+      },
+      success: (data) => {
+
+        var labels = ["Carbs", "Fat", "Protein"];
+        var values = [data.nutrition.caloricBreakdown.percentCarbs,
+                      data.nutrition.caloricBreakdown.percentFat,
+                      data.nutrition.caloricBreakdown.percentProtein];
+        
+        populateNutritionChart(labels, values);
+
+      }
+    });
+  }
+
+  function populateNutritionChart(labels, values) {
+
+    var data = [{
+      values: values,
+      labels: labels,
+      type: 'pie'
+    }];
+
+    var layout = {
+      height: 400,
+      width: 500
+    };
+
+    Plotly.newPlot('nutrition-chart', data, layout);
   }
 
   /*** Initializer ***/
