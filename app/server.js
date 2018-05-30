@@ -27,6 +27,8 @@ app.get('/signup', (req, res) => res.sendfile('static/signup.html'));
 
 app.get('/calendar', (req, res) => res.sendfile('static/calendar.html'));
 
+app.get('/recipe/:recipeId', (req, res) => res.sendfile('static/recipe.html'));
+
 // app.get('*', (req, res) => res.sendfile('static/404.html'));
 
 /************** Server **************/

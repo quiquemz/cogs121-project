@@ -16,11 +16,12 @@ $(document).ready(() => {
   });
 
   /*** Function definitions ***/
-
   function getRandomRecipes(user, ammount) {
+    const URL = `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=${ammount}`;
+
     if (user) {
       $.ajax({
-        url: `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=${ammount}`,
+        url: URL,
         type: 'GET',
         dataType: 'json',
         headers: {
@@ -43,7 +44,7 @@ $(document).ready(() => {
         <div class="r-card-content">
           <div class="r-card-main-content">
             <h5 class="r-card-title">${recipe.title}</h5>
-            <div class="r-btn">
+            <div class="r-btn detail-btn">
               <i class="fa fa-info-circle"></i>
             </div>
           </div>
@@ -59,12 +60,15 @@ $(document).ready(() => {
         </div>
       </div>`);
 
+
+
     if (recipe.image) {
       card.css('background', `url(${recipe.image}) ${backgroundCSS}`);
       card.css('background-size', backgroundSizeCSS);
       card.data('recipeTitle', recipe.title);
       card.data('recipeSourceUrl', recipe.sourceUrl);
       card.data('recipeId', recipe.id);
+      card.on('click', () => window.location.replace(`${window.location.origin}/recipe/${recipe.id}`));
 
       $('.r-cards-container').prepend(card);
     }
@@ -105,6 +109,8 @@ $(document).ready(() => {
         break;
       default:
     }
+
+    // NOTE: Wait till transition ends to delete it
     $('.r-card:last-child').on('transitionend', (el) => removeCard(el));
     getRandomRecipes(auth.currentUser, 1);
   }
