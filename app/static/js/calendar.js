@@ -30,7 +30,7 @@ $(document).ready(function() {
     } else if (currentMoment.isBefore(m, 'isoWeek')) {
       $('.week-name').html(`<h5>${m.diff(currentMoment, 'weeks')} Weeks Ago</h5>`);
     } else {
-      // HACK: added 1 mannuly... double check
+      // HACK: added 1 mannualy... double check
       $('.week-name').html(`<h5>${currentMoment.diff(m, 'weeks') + 1} Weeks After</h5>`);
     }
   }
