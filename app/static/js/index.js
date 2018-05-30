@@ -8,6 +8,13 @@ $(document).ready(() => {
   const auth = firebase.auth();
   const db = firebase.database();
 
+
+  $('#datetimepicker12').datetimepicker({
+      inline: true, 
+      sideBySide: true,
+      format: 'DD/MM/YYYY'
+  });
+
   /*** Function definitions ***/
 
   function getRandomRecipes(user, ammount) {
@@ -90,7 +97,7 @@ $(document).ready(() => {
         break;
       case TOP:
         $('.r-card:last-child').addClass('r-card-out-top');
-        // TODO add to calendar
+        setTimeout(toggleModal("open"), 100);
         break;
       case RIGHT:
         $('.r-card:last-child').addClass('r-card-out-right');
@@ -102,6 +109,37 @@ $(document).ready(() => {
     getRandomRecipes(auth.currentUser, 1);
   }
 
+  function toggleModal(action) {
+  	if (action == "close") {
+  		var dateObj = $('#datetimepicker12').data("DateTimePicker").date();
+  		var date = dateObj['_d'].getDate();
+  		var month = dateObj['_d'].getMonth()+1;
+  		var year = dateObj['_d'].getYear()-100+2000;
+
+  		if (month < 10)
+  			month = '0' + month;
+  		if (date < 10)
+  			date = '0' + date;
+
+  		var meal = $("#meals-tab .active").text().replace(/\s/g,'').toLowerCase();
+  		var firebaseDateObj = "" + month + "-" + date + "-" + year;
+      	const recipeTitle = $('.r-card:last-child').data('recipeTitle');
+      	const recipeId = $('.r-card:last-child').data('recipeId');
+
+    	if (auth.currentUser) {
+	      db.ref('users/' + auth.currentUser.uid)
+	        .child('calendar')
+	        .child(firebaseDateObj)
+	        .child(meal)
+	        .update({
+	          [recipeId]: recipeTitle
+	        })
+	    };
+  	}
+  	
+    $('#myModal').modal('toggle');
+  }
+
   /*** Get initial "random" recipes ***/
   getRandomRecipes(true, 10);
 
@@ -109,4 +147,5 @@ $(document).ready(() => {
   $('.next-btn').on('click', () => slideCard(LEFT));
   $('.calendar-btn').on('click', () => slideCard(TOP));
   $('.favorites-btn').on('click', () => slideCard(RIGHT));
+  $('#save-calendar').on('click', () => toggleModal("close"));
 });

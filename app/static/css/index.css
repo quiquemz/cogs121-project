@@ -103,3 +103,9 @@
 #content .footer-btn .fa-star {
   color: #F4BD46;
 }
+
+#meals-tab input {
+    visibility:hidden;
+    width: 0px;
+    height: 0px;
+}
