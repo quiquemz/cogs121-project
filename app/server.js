@@ -21,6 +21,8 @@ app.get('/', (req, res) => {
   res.sendfile('static/index.html');
 });
 
+app.get('/main_index', (req, res) => res.sendfile('static/main_index.html'));
+
 app.get('/login', (req, res) => res.sendfile('static/login.html'));
 
 app.get('/signup', (req, res) => res.sendfile('static/signup.html'));

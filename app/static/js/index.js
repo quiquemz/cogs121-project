@@ -129,8 +129,9 @@ $(document).ready(() => {
 
   		var meal = $("#meals-tab .active").text().replace(/\s/g,'').toLowerCase();
   		var firebaseDateObj = "" + month + "-" + date + "-" + year;
-      	const recipeTitle = $('.r-card:last-child').data('recipeTitle');
-      	const recipeId = $('.r-card:last-child').data('recipeId');
+      
+    	const recipeTitle = $('.r-card:last-child').data('recipeTitle');
+    	const recipeId = $('.r-card:last-child').data('recipeId');
 
     	if (auth.currentUser) {
 	      db.ref('users/' + auth.currentUser.uid)
