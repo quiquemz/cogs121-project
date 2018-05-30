@@ -92,7 +92,7 @@
       <!-- Page Content -->
       <div id="content">
 
-       <!-- Modal -->
+        <!-- Modal -->
         <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -106,39 +106,37 @@
                 Add a date <br />
                 <div style="overflow:hidden;">
                   <div class="form-group">
-                      <div class="row">
-                          <div class="col-md-2"></div>
-                          <div class="col-md-8">
-                              <div id="datetimepicker12"></div>
-                          </div>
-                          <div class="col-md-2"></div>
+                    <div class="row">
+                      <div class="col-md-2"></div>
+                      <div class="col-md-8">
+                        <div id="datetimepicker12"></div>
                       </div>
+                      <div class="col-md-2"></div>
+                    </div>
                   </div>
-              </div><br />
-
-              Choose a meal <br />
+                </div><br /> Choose a meal <br />
                 <div style="overflow:hidden;">
                   <div class="form-group">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div id="meals-tab" class="btn-group btn-group-justified" data-toggle="buttons">
-                            <a href="#prices" class="btn btn-default active" data-toggle="tab">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div id="meals-tab" class="btn-group btn-group-justified" data-toggle="buttons">
+                          <a href="#prices" class="btn btn-default active" data-toggle="tab">
                               <input type="radio" />Breakfast
                             </a>
-                            <a href="#features" class="btn btn-default" data-toggle="tab">
+                          <a href="#features" class="btn btn-default" data-toggle="tab">
                               <input type="radio" />Lunch
                             </a>
-                            <a href="#requests" class="btn btn-default" data-toggle="tab">
+                          <a href="#requests" class="btn btn-default" data-toggle="tab">
                               <input type="radio" />Dinner
                             </a>
-                            <a href="#contact" class="btn btn-default" data-toggle="tab">
+                          <a href="#contact" class="btn btn-default" data-toggle="tab">
                               <input type="radio" />Snacks
                             </a>
-                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                </div>
 
               </div>
               <div class="modal-footer">
@@ -151,26 +149,7 @@
 
         <div class="r-container">
           <div class="r-cards-container">
-            <div class="r-card">
-              <div class="r-card-content">
-                <div class="r-card-main-content">
-                  <h5 class="r-card-title">Recipe Title</h5>
-                  <div class="r-btn">
-                    <i class="fa fa-info-circle"></i>
-                  </div>
-                </div>
-                <div class="r-card-secondary-content">
-                  <span class="r-card-text">American, Belgian</span>
-                  <div class="r-card-time">
-                    <div class="clock-icon">
-                      <i class="far fa-clock"></i>
-                    </div>
-                    <span class="r-card-text">25 mins</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+            <!-- Dynamically adding cards from API-->
           </div>
           <div>
             <div class="footer">
@@ -198,10 +177,12 @@
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <!-- Bootstrap Js CDN -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <script type="text/javascript" src="js/moment.js"></script>
     <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
     <!-- Firebase configuration and management -->
     <script type="text/javascript" src="js/initFirebase.js"></script>
+
     <script type="text/javascript" src="js/header.js"></script>
     <script type="text/javascript" src="js/sidebar.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
