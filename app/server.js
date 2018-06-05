@@ -17,9 +17,9 @@ const server = http.createServer(app);
 // });
 
 /************** Routes **************/
-app.get('/', (req, res) => {
-  res.sendfile('static/index.html');
-});
+app.get('/', (req, res) => res.redirect('/discover'));
+
+app.get('/discover', (req, res) => res.sendfile('static/index.html'));
 
 app.get('/main_index', (req, res) => res.sendfile('static/main_index.html'));
 

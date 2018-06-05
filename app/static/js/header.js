@@ -7,7 +7,7 @@ $(document).ready(function() {
 
   function initializeHeader(location) {
     switch (location) {
-      case '/':
+      case '/discover':
         $('#header').css('background', '#FDFDFD').css('color', '#363046');
         $('.right-header-btn').append('<i class="fa fa-undo-alt"></i>');
         break;

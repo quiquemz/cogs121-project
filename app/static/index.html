@@ -29,12 +29,6 @@
     <!-- Add additional services you want to use -->
     <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-database.js"></script>
-
-    <!-- Models -->
-    <script type="text/javascript" src="models/user.js"></script>
-    <script type="text/javascript" src="models/foodPreferences.js"></script>
-    <script type="text/javascript" src="models/calendar.js"></script>
-    <script type="text/javascript" src="models/groceries.js"></script>
   </head>
 
   <body>
@@ -49,7 +43,7 @@
         <div id="brand">
           <h3>RECIPREP</h3>
         </div>
-        <div class="r-btn header-btn right-header-btn add-recipe-btn">
+        <div class="r-btn header-btn right-header-btn restore-recipe-btn">
           <!-- Added dynamically in header.js -->
         </div>
       </nav>
@@ -114,33 +108,33 @@
                       <div class="col-md-2"></div>
                     </div>
                   </div>
-              </div><br />
+                </div><br />
 
-              <span class="modal-sub-title">Choose a meal</span> <br />
+                <span class="modal-sub-title">Choose a meal</span> <br />
                 <div style="overflow:hidden;">
                   <div class="form-group">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <center>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <center>
                           <div id="meals-tab" class="btn-group btn-group-justified" data-toggle="buttons">
                             <a href="#prices" class="btn btn-default active" data-toggle="tab">
                               <input type="radio" />Breakfast
                             </a>
-                          <a href="#features" class="btn btn-default" data-toggle="tab">
+                            <a href="#features" class="btn btn-default" data-toggle="tab">
                               <input type="radio" />Lunch
                             </a>
-                          <a href="#requests" class="btn btn-default" data-toggle="tab">
+                            <a href="#requests" class="btn btn-default" data-toggle="tab">
                               <input type="radio" />Dinner
                             </a>
                           </div>
-                         </center>
-                        </div>
+                        </center>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
               <div class="modal-footer">
-                <button type="button" id="save-calendar" class="btn btn-primary">Save</button>
+                <button type="button" id="save-to-calendar-btn" class="btn btn-primary">Save</button>
               </div>
             </div>
           </div>
@@ -185,6 +179,7 @@
     <script type="text/javascript" src="js/header.js"></script>
     <script type="text/javascript" src="js/sidebar.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+
   </body>
 
 </html>

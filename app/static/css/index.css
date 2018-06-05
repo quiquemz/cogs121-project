@@ -16,9 +16,6 @@
 
 #content .r-card {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   height: 100%;
   max-width: 520px;
   margin: auto;
@@ -28,6 +25,12 @@
   background-blend-mode: multiply;
   background-size: auto 100%;
   transition: all 0.5s;
+}
+
+#content .r-card-in {
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 #content .r-card-out-left {
@@ -105,9 +108,9 @@
 }
 
 #meals-tab input {
-    visibility:hidden;
-    width: 0px;
-    height: 0px;
+  visibility: hidden;
+  width: 0px;
+  height: 0px;
 }
 
 #meals-tab .btn {
