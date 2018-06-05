@@ -91,6 +91,15 @@ $(document).ready(() => {
       card.data('recipeDiets', recipe.diets);
       card.data('recipeReadyInMinutes', recipe.readyInMinutes);
 
+      // Format ingredients
+      var ingredients = [];
+      recipe.extendedIngredients.forEach(function(ingredient) {
+        var ilist = [ingredient.name, ingredient.amount, ingredient.unit];
+        ingredients.push(ilist);
+
+      });
+      card.data('recipeIngredients', ingredients);
+
       card.on('click', () => {
         window.location.replace(`${window.location.origin}/recipe/${recipe.id}`);
         localStorage.setItem("currentRecipe", JSON.stringify({
@@ -147,11 +156,13 @@ $(document).ready(() => {
     if (auth.currentUser) {
       const recipeTitle = card.data('recipeTitle');
       const recipeId = card.data('recipeId');
+      const ingredients = card.data('recipeIngredients');
 
       db.ref('users/' + auth.currentUser.uid)
         .child('favoriteRecipes')
         .update({
-          [recipeId]: recipeTitle
+          [recipeId]: recipeTitle,
+          [recipeId + "Ingredients"] : ingredients
         });
     }
   }
