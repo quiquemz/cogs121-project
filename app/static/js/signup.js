@@ -16,12 +16,23 @@ $(document).ready(function() {
 
     auth.createUserWithEmailAndPassword(email, password)
       .then(res => {
-        const uid = res.user.uid;
-
-        writeUserDataDB(uid, email);
-        // TODO Redirect user to set preferences page
-        window.location = "/";
-        // TODO Prompt user that he/she succesfully signed up
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                const uid = res.user.uid;
+                writeUserDataDB(uid, email);
+                user.getIdToken().then(function(idToken) {  //idToken is the user's firebase token
+                   $.ajax({
+                     url: '/',
+                     type: 'GET', 
+                     headers: {'Authorization': 'Bearer ' + idToken },
+                     success: (status) => {
+                       if (status == 'Login Successful')
+                         window.location.href = "/discover"
+                     }
+                   });
+                });
+            }
+        });
       })
       .catch(e => {
         console.log(e);

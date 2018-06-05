@@ -3,25 +3,39 @@
 import express from 'express';
 import http from 'http';
 import path from 'path';
-import * as firebase from 'firebase-admin';
+import * as admin from 'firebase-admin';
 
 const app = express();
 const server = http.createServer(app);
 
-/************** Firebase setup **************/
-// const serviceAccount = require('./serviceAccountKey.json');
-//
-// firebase.initializeApp({
-//   credential: firebase.credential.cert(serviceAccount),
-//   databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
-// });
+/********** Firebase Admin SDK Setup **********/
+var serviceAccount = require('./getreciprep-7d245d0f1049.json');
 
-/************** Routes **************/
-app.get('/', (req, res) => {
-  res.sendfile('static/index.html');
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'https://getreciprep.firebaseio.com/'
 });
 
-app.get('/main_index', (req, res) => res.sendfile('static/main_index.html'));
+/************** Routes **************/
+app.get('/', function (req, res) {
+  var idToken = '';
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer '))
+  	idToken = req.headers.authorization.split('Bearer ')[1];
+
+  admin.auth().verifyIdToken(idToken)
+  .then(function(decodedToken) {
+    var uid = decodedToken.uid;
+    res.send('Login Successful');
+  }).catch(function(error) {
+  	res.redirect('/home');
+    res.send('Login Failed');
+  });
+
+});
+
+app.get('/discover', (req, res) => res.sendfile('static/index.html'));
+
+app.get('/home', (req, res) => res.sendfile('static/main_index.html'));
 
 app.get('/login', (req, res) => res.sendfile('static/login.html'));
 

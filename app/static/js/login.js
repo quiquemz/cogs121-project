@@ -15,17 +15,27 @@ $(document).ready(function() {
 
     auth.signInWithEmailAndPassword(email, password)
       .then(res => {
-        window.location = "/";
-        // TODO Prompt user that he/she succesfully logged in
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                user.getIdToken().then(function(idToken) {  //idToken is the user's firebase token
+                   $.ajax({
+                     url: '/',
+                     type: 'GET', 
+                     headers: {'Authorization': 'Bearer ' + idToken },
+                     success: (status) => {
+                       if (status == 'Login Successful')
+                         window.location.href = "/discover"
+                     }
+                   });
+                });
+            }
+        });
       })
       .catch(e => {
         alert(e.message);
-        // TODO Handle errors
-        // TODO Prompt user with error
       });
   }
 
   /*** Event Handlers ***/
   $('#email-login-form').on('submit', (e) => login(e));
-
 });

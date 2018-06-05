@@ -163,5 +163,4 @@ $(document).ready(() => {
     toggleModal("close");
     removeLastCard();
   });
-
 });
