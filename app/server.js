@@ -32,6 +32,7 @@ app.get('/', function (req, res) {
   });
 
 });
+app.get('/', (req, res) => res.redirect('/discover'));
 
 app.get('/discover', (req, res) => res.sendfile('static/index.html'));
 
