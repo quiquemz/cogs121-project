@@ -32,9 +32,6 @@ app.get('/', function (req, res) {
   });
 
 });
-app.get('/', (req, res) => res.redirect('/discover'));
-
-app.get('/discover', (req, res) => res.sendfile('static/index.html'));
 
 app.get('/home', (req, res) => res.sendfile('static/main_index.html'));
 
@@ -42,7 +39,13 @@ app.get('/login', (req, res) => res.sendfile('static/login.html'));
 
 app.get('/signup', (req, res) => res.sendfile('static/signup.html'));
 
+app.get('/discover', (req, res) => res.sendfile('static/index.html'));
+
 app.get('/calendar', (req, res) => res.sendfile('static/calendar.html'));
+
+app.get('/favorites', (req, res) => res.sendfile('static/favorites.html'));
+
+app.get('/grocerylist', (req, res) => res.sendfile(''));
 
 app.get('/recipe/:recipeId', (req, res) => res.sendfile('static/recipe.html'));
 

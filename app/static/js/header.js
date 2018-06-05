@@ -9,6 +9,10 @@ $(document).ready(function() {
     switch (location) {
       case '/':
       case '/home':
+      case '/favorites':
+      case '/grocerylist':
+        $('#header').css('background', '#FDFDFD').css('color', '#363046');
+        break;
       case '/discover':
         $('#header').css('background', '#FDFDFD').css('color', '#363046');
         $('.right-header-btn').append('<i class="fa fa-undo-alt"></i>');
