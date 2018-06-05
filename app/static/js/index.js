@@ -22,6 +22,9 @@ $(document).ready(() => {
       localStorage.setItem("removedRecipes", "[]");
     } catch (error) {
       getRandomRecipes(true, 10);
+
+      localStorage.setItem("currentRecipe", "");
+      localStorage.setItem("removedRecipes", "[]");
     }
   }
 
