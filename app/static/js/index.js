@@ -52,7 +52,9 @@ $(document).ready(() => {
   function createCard(recipe, initialPosition) {
     const backgroundCSS = 'center no-repeat, linear-gradient(rgba(255, 255, 255, 0) 65%, #888)';
     const backgroundSizeCSS = 'auto 100%';
-    const rCardPositionCSS = (initialPosition === IN) ? 'r-card-in' : 'r-card-out-left';
+    const rCardPositionCSS = (initialPosition === IN) ? 'r-card-in' :
+      (initialPosition === LEFT) ? 'r-card-out-left' :
+      (initialPosition === RIGHT) ? 'r-card-out-right' : 'r-card-out-top';
     const card =
       $(`<div class="r-card ${rCardPositionCSS}">
         <div class="r-card-content">
@@ -104,21 +106,8 @@ $(document).ready(() => {
   }
 
   function removeFirstCard() {
-    const removedRecipes = JSON.parse(localStorage.getItem("removedRecipes"));
     const card = $('.r-card:last-child');
-
-    removedRecipes.push({
-      title: card.data('recipeTitle'),
-      sourceUrl: card.data('recipeSourceUrl'),
-      id: card.data('recipeId'),
-      image: card.data('recipeImage'),
-      cuisines: card.data('recipeCuisines'),
-      diets: card.data('recipeDiets'),
-      readyInMinutes: card.data('recipeReadyInMinutes')
-    });
-
-    localStorage.setItem('removedRecipes', JSON.stringify(removedRecipes)); // removing from local storage
-    $('.r-card:last-child').remove(); // removing from DOM
+    card.remove(); // removing from DOM
   }
 
   function restoreRemovedCard() {
@@ -126,7 +115,7 @@ $(document).ready(() => {
 
     if (removedRecipes.length > 0) {
       const recipe = removedRecipes.pop();
-      const card = createCard(recipe, OUT);
+      const card = createCard(recipe, recipe.removedFrom);
 
       if (card) {
         $('.r-cards-container').append(card);
@@ -134,6 +123,8 @@ $(document).ready(() => {
         // HACK: Needed so that it waits for append to finish and the animation applies.
         setTimeout(() => {
           card.removeClass('r-card-out-left');
+          card.removeClass('r-card-out-right');
+          card.removeClass('r-card-out-top');
           card.addClass('r-card-in');
         }, 1);
 
@@ -148,9 +139,11 @@ $(document).ready(() => {
   }
 
   function addToFavoritesDB() {
+    const card = $('.r-card:last-child');
+
     if (auth.currentUser) {
-      const recipeTitle = $('.r-card:last-child').data('recipeTitle');
-      const recipeId = $('.r-card:last-child').data('recipeId');
+      const recipeTitle = card.data('recipeTitle');
+      const recipeId = card.data('recipeId');
 
       db.ref('users/' + auth.currentUser.uid)
         .child('favoriteRecipes')
@@ -162,33 +155,50 @@ $(document).ready(() => {
 
   function slideCard(direction) {
     const user = auth.currentUser;
-    $('.r-card:last-child').addClass('r-card-out');
+    const card = $('.r-card:last-child');
+    const removedRecipes = JSON.parse(localStorage.getItem("removedRecipes"));
+    const recipeToRemove = {
+      title: card.data('recipeTitle'),
+      sourceUrl: card.data('recipeSourceUrl'),
+      id: card.data('recipeId'),
+      image: card.data('recipeImage'),
+      cuisines: card.data('recipeCuisines'),
+      diets: card.data('recipeDiets'),
+      readyInMinutes: card.data('recipeReadyInMinutes')
+    }
 
     switch (direction) {
       case LEFT:
-        $('.r-card:last-child').addClass('r-card-out-left');
+        card.addClass('r-card-out-left');
+        recipeToRemove.removedFrom = LEFT;
         // NOTE: Wait till transition ends to delete it
         $('.r-card:last-child').on('transitionend', () => removeFirstCard());
         break;
       case TOP:
-        $('.r-card:last-child').addClass('r-card-out-top');
+        card.addClass('r-card-out-top');
+        recipeToRemove.removedFrom = TOP;
         // NOTE: Wait till transition ends to open modal it
-        $('.r-card:last-child').on('transitionend', () => toggleModal("open"));
+        card.on('transitionend', () => toggleModal("open"));
         break;
       case RIGHT:
-        $('.r-card:last-child').addClass('r-card-out-right');
+        card.addClass('r-card-out-right');
+        recipeToRemove.removedFrom = RIGHT;
         // NOTE: Wait till transition ends to delete it
-        $('.r-card:last-child').on('transitionend', () => removeFirstCard());
+        card.on('transitionend', () => removeFirstCard());
         addToFavoritesDB();
         break;
       default:
     }
 
+    removedRecipes.push(recipeToRemove);
+    localStorage.setItem('removedRecipes', JSON.stringify(removedRecipes)); // removing from local storage
     getRandomRecipes(auth.currentUser, 1);
   }
 
   function toggleModal(action) {
-    if (action == "close") {
+    removeFirstCard();
+
+    if (action === "save") {
       var dateObj = $('#datetimepicker12').data("DateTimePicker").date();
       var date = dateObj['_d'].getDate();
       var month = dateObj['_d'].getMonth() + 1;
@@ -215,6 +225,11 @@ $(document).ready(() => {
           })
       };
     }
+
+    if (action === "close") {
+      restoreRemovedCard();
+    }
+
     $('#myModal').modal('toggle');
   }
 
@@ -231,8 +246,6 @@ $(document).ready(() => {
   $('.calendar-btn').on('click', () => slideCard(TOP));
   $('.favorites-btn').on('click', () => slideCard(RIGHT));
   $('.restore-recipe-btn').on('click', () => restoreRemovedCard());
-  $('#save-to-calendar-btn').on('click', () => {
-    toggleModal("close");
-    removeFirstCard();
-  });
+  $('.close-calendar-modal-btn').on('click', () => toggleModal("close"));
+  $('#save-to-calendar-btn').on('click', () => toggleModal("save"));
 });
