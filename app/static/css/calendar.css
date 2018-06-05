@@ -2,6 +2,11 @@ hr {
   margin: 20px 0 0 0;
 }
 
+.breakfast-recipe .name:hover, .lunch-recipe .name:hover, .dinner-recipe .name:hover {
+  cursor: pointer;
+  font-weight: 1000;
+}
+
 .week-slider .prev-week-btn {
   text-align: left;
   color: #363046;

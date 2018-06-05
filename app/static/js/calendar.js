@@ -60,14 +60,30 @@ $(document).ready(function() {
     getCalendarFromDB();
   }
 
-  function addRecipeItem(meal, name) {
-    const listItem =
+  function addRecipeItem(id, meal, name) {
+    const listItem = $(
       `<li class="list-group-item ${meal}-recipe">
         <div class="name">${name}</div>
-        <div class="r-btn food-options-btn action"><i class="fa fa-ellipsis-h"></i></div>
-      </li>`
+        <div class="r-btn remove-recipe-btn action"><i class="fa fa-trash"></i></div>
+      </li>`);
+
+    listItem.find('.name').on('click', () => window.location.replace(`${window.location.origin}/recipe/${id}`));
+    listItem.find('.remove-recipe-btn').on('click', (e) => removeRecipeItem(e, meal, id));
 
     $(`.list-${meal}`).append(listItem);
+
+  }
+
+  function addRecipeItemDB(id, meal, name) {
+    db.ref(`/users/${auth.currentUser.uid}/calendar/${currentMoment.format(DB_DATE)}/${meal}`)
+      .update({
+        [id]: name
+      });
+  }
+
+  function removeRecipeItem(e, meal, id) {
+    $(e.target).closest('.list-group-item').remove();
+    db.ref(`/users/${auth.currentUser.uid}/calendar/${currentMoment.format(DB_DATE)}/${meal}/${id}`).remove();
   }
 
   function getCalendarFromDB() {
@@ -81,7 +97,7 @@ $(document).ready(function() {
             const recipes = meals[meal];
             Object.keys(recipes).forEach(id => {
               const name = recipes[id];
-              addRecipeItem(meal, name);
+              addRecipeItem(id, meal, name);
             })
           })
         }
@@ -101,7 +117,8 @@ $(document).ready(function() {
         Object.keys(recipes).forEach(id => {
           $('#myModalList').append(`<li class="list-group-item" id="${id}">${recipes[id]}</li>`);
           $('#' + id).on('click', () => {
-            addRecipeItem(type, recipes[id]);
+            addRecipeItem(id, type, recipes[id]);
+            addRecipeItemDB(id, type, recipes[id]);
             $('#myModal').modal('toggle');
           });
         })
