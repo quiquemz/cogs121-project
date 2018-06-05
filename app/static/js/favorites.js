@@ -18,8 +18,6 @@ function initializeFavorites() {
     db.ref(`/users/${auth.currentUser.uid}/favoriteRecipes`).once("value", res => {
       const recipes = res.val();
 
-    console.log(recipes);
-
     var recipeList = Object.keys(recipes);
 
     for (let i = 0; i < recipeList.length; i++) {
@@ -47,7 +45,6 @@ function loadRecipe(recipeId) {
     },
     success: (data) => {
       createRecipeListItem(data);
-      console.log(data);
     }
   });
 }
