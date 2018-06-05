@@ -42,8 +42,12 @@ $(document).ready(function() {
       window.location.href = '/home';
     }
     else if (currentPage.match('recipe') == 'recipe') {
-    console.log(currentPage);
-      window.location.href = '/discover';
+      //console.log(window.location.search.substring(1).split("?")[0]);
+      var comingFromFavorites = window.location.search.substring(1).split("?")[0];
+      if (comingFromFavorites == 'favorites')
+        window.location.href = '/favorites';
+      else
+        window.location.href = '/discover';
     }
   }
 

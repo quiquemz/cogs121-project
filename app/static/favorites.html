@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <!-- Custom Specific CSS -->
-    <link rel="stylesheet" href="css/calendar.css">
+    <link rel="stylesheet" href="css/favorites.css">
 
     <!-- Firebase App is always required and must be first -->
     <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-app.js"></script>
@@ -59,9 +59,9 @@
         <!-- Sidebar Links -->
         <ul class="list-unstyled">
           <li><a href="/discover">Discover</a></li>
-          <li class="active"><a href="/calendar">Calendar</a></li>
+          <li><a href="/calendar">Calendar</a></li>
           <li><a href="/grocerylist">Grocery List</a></li>
-          <li><a href="#">Favorites</a></li>
+          <li class="active"><a href="#">Favorites</a></li>
         </ul>
 
         <div class="sidebar-footer">
@@ -82,8 +82,6 @@
       <!-- Page Content -->
       <div id="content">
         <div class="container">
-          <ul class="list-group" id="myList">
-          </ul>
         </div>
       </div>
 
