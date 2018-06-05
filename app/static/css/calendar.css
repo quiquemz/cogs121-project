@@ -96,3 +96,12 @@ hr {
   float: right;
   color: #363046;
 }
+
+#load-more {
+  list-style-type: none;
+  font-family: SFPro-Semibold;
+  text-align: center;
+  border-width: 1px 0px 0px 0px;
+  border-style: line;
+  border-color: rgba(0,0,0,.125)
+}

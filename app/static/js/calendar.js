@@ -105,6 +105,36 @@ $(document).ready(function() {
     }
   }
 
+  function addRecipeItemCallback(recipeId, type, recipeTitle) {
+    return function() {
+      addRecipeItem(recipeId, type, recipeTitle);
+      addRecipeItemDB(recipeId, type, recipeTitle);
+      $('#myModal').modal('toggle');
+    }
+  }
+
+  function loadMoreFavorites(recipes, type, recipeList, displayNum) {
+    $('#myModalList li:last-child').remove();
+
+    var originalDisplayNum = displayNum;
+    if (displayNum + 10 < recipeList.length)
+      displayNum += 10;
+    else
+      displayNum = recipeList.length;
+
+    for (let i = originalDisplayNum; i < displayNum; i++) {
+      var recipeId = recipeList[i];
+      var recipeTitle = recipes[recipeId];
+      
+      $('#myModalList').append(`<li class="list-group-item" id="${recipeId}">${recipeTitle}</li>`);
+      $('#' + recipeId).click(addRecipeItemCallback(recipeId, type, recipeTitle));
+    }
+    if (displayNum < recipeList.length) {
+      $('#myModalList').append(`<li class="list-group-item" id="load-more">Load More</li>`);
+      $('#load-more').on('click', () => loadMoreFavorites(recipes, type, recipeList, displayNum));
+    }
+  }
+
   function getFavoriteRecipesFromDB(type) {
     if (auth.currentUser) {
       $('#myModalList').empty();
@@ -113,15 +143,24 @@ $(document).ready(function() {
       db.ref(`/users/${auth.currentUser.uid}/favoriteRecipes`).once("value", res => {
         const recipes = res.val();
 
-        // Iterate through favorite recipes and add to array
-        Object.keys(recipes).forEach(id => {
-          $('#myModalList').append(`<li class="list-group-item" id="${id}">${recipes[id]}</li>`);
-          $('#' + id).on('click', () => {
-            addRecipeItem(id, type, recipes[id]);
-            addRecipeItemDB(id, type, recipes[id]);
-            $('#myModal').modal('toggle');
-          });
-        })
+      var displayNum = 0;
+      var recipeList = Object.keys(recipes);
+      if (recipeList.length < 5)
+        displayNum = recipeList.length;
+      else
+        displayNum = 5;
+
+      for (let i = 0; i < displayNum; i++) {
+        var recipeId = recipeList[i];
+        var recipeTitle = recipes[recipeId];
+        
+        $('#myModalList').append(`<li class="list-group-item" id="${recipeId}">${recipeTitle}</li>`);
+        $('#' + recipeId).click(addRecipeItemCallback(recipeId, type, recipeTitle));
+      }
+      if (displayNum < recipeList.length) {
+        $('#myModalList').append(`<li class="list-group-item" id="load-more">Load More</li>`);
+        $('#load-more').on('click', () => loadMoreFavorites(recipes, type, recipeList, displayNum));
+      }
       });
     }
   }
