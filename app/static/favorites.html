@@ -35,12 +35,12 @@
     <div class="wrapper">
 
       <!-- Header -->
-      <nav id="header">
+      <nav id="header" style="border-bottom: 1px solid rgba(0, 0, 0, 0.1);">
         <div class="r-btn header-btn left-header-btn open-sidebar-btn">
           <i class="fa fa-bars"></i>
         </div>
         <div id="brand">
-          <h3>RECIPREP</h3>
+          <h5 class="page-title">Favorite Recipes</h5>
         </div>
       </nav>
 
@@ -82,8 +82,12 @@
       <!-- Page Content -->
       <div id="content">
         <div class="container">
-          <h3>Favorite Recipes</h3>
-          <br>
+          <div class="favorites-list"></div>
+          <div class="empty-state favorites-empty-state">
+            <img src="images/file.svg" alt="" class="empty-state-icon"><br />
+            <span class="empty-state-text">You do not have any recipes favorited!</span>
+            <a href="/discover"><button type="button" class="btn btn-primary empty-state-button">Discover More Recipes</button></a>
+          </div>
         </div>
       </div>
 

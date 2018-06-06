@@ -61,6 +61,15 @@ p {
   height: 100%;
 }
 
+.page-title {
+  font-weight: 500; 
+  font-family: SFPro-Semibold;
+}
+
+.container {
+  margin-bottom: 32px;
+}
+
 .modal-title {
   font-family: SFPro-Semibold;
   font-size: 1.2em;
@@ -79,4 +88,7 @@ p {
   padding-left: 32px;
   padding-right: 32px;
   text-transform: capitalize;
+  font-size: 1em;
 }
+
+

@@ -29,3 +29,21 @@
   position: absolute;
   bottom: 0px;
 }
+
+.empty-state-icon {
+  max-width: 24%;
+  padding-bottom: 32px;
+}
+
+.empty-state-text {
+  padding-bottom: 32px;
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 40%;
+}
+
+.empty-state-button {
+  margin-top: 32px;
+}

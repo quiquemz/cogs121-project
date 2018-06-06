@@ -97,16 +97,29 @@ hr {
   color: #363046;
 }
 
-#load-more {
-  list-style-type: none;
-  font-family: SFPro-Semibold;
-  text-align: center;
-  border-width: 1px 0px 0px 0px;
-  border-style: line;
-  border-color: rgba(0,0,0,.125)
+.modal-body {
+  padding: 0.8rem;
 }
 
 .modal-footer {
   display: flex;
   justify-content: center;
+}
+
+.favorite-modal-list li {
+  position: relative;
+  display: block;
+  padding: .64rem .8rem;
+  margin-bottom: 8px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 4px;
+}
+
+#load-more {
+  list-style-type: none;
+  font-family: SFPro-Semibold;
+  text-align: center;
+  border-width: 0px;
+  color: #7E5A9B;
 }
