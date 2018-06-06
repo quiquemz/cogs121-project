@@ -48,38 +48,46 @@ $(document).ready(() => {
   function getCalendarIngredients() {
     db.ref(`/users/${auth.currentUser.uid}/favoriteRecipes`).once('value',
       function(snapshot) {
+        if(snapshot.exists()) {
+          $('.non-empty-state').show();
+          $('.empty-state').hide();
 
-        ingredientsMap = {}
+          ingredientsMap = {}
 
-        snapshot.forEach(function(child) {
+          snapshot.forEach(function(child) {
 
-          var key = child.key;
-          if (key.endsWith("Ingredients")) {
+            var key = child.key;
+            if (key.endsWith("Ingredients")) {
 
-            var ingredientList = child.val();
-            var i;
-            for (i = 0; i < ingredientList.length; i++) {
+              var ingredientList = child.val();
+              var i;
+              for (i = 0; i < ingredientList.length; i++) {
 
-              // Array containing name and quantity from db
-              var thisIngredient = ingredientList[i];
+                // Array containing name and quantity from db
+                var thisIngredient = ingredientList[i];
 
-              // Ingredient name
-              var type = thisIngredient[0];
+                // Ingredient name
+                var type = thisIngredient[0];
 
-              // Quantity and Units
-              var formattedQuantity = thisIngredient[1] + " " + thisIngredient[2];
+                // Quantity and Units
+                var formattedQuantity = thisIngredient[1] + " " + thisIngredient[2];
 
-              // Append to grocery list
-              ingredientsMap[type] = formattedQuantity;
+                // Append to grocery list
+                ingredientsMap[type] = formattedQuantity;
 
+              }
             }
-          }
-        });
+          });
 
-        // Add to webpage
-        Object.keys(ingredientsMap).forEach(function(key) {
-          $(".grocery-list").append('<li class="list-group-item">' + key + ' (' + ingredientsMap[key] + ')</li>');
-        })
+          // Add to webpage
+          Object.keys(ingredientsMap).forEach(function(key) {
+            $(".grocery-list").append('<li class="list-group-item">' + key + ' (' + ingredientsMap[key] + ')</li>');
+          })
+        }
+        else {
+          $('.non-empty-state').hide();
+          $('.empty-state').show();
+        }
 
       });
 

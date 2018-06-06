@@ -46,9 +46,9 @@
   padding-top: 16px;
 }
 
-#content .details h5 {
-  font-size: 16px;
-  font-weight: 500;
+.recipe-titles {
+  font-size: 1em;
+  font-family: SFPro-Semibold;
 }
 
 #content .details li {

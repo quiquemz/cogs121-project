@@ -91,4 +91,26 @@ p {
   font-size: 1em;
 }
 
+.empty-state-icon {
+  max-width: 24%;
+  padding-bottom: 32px;
+}
 
+.empty-state-text {
+  padding-bottom: 32px;
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 40%;
+  max-width: 320px;
+}
+
+.empty-state-button {
+  margin-top: 32px;
+}
+
+button {
+  text-transform: capitalize !important;
+  font-size: 16px !important;
+  }
