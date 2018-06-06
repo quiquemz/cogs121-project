@@ -1,5 +1,13 @@
 //! moment.js
 
+  /***
+  File: moment.js
+  Description: Utility class that is used inconjunction with our datepicker for
+  time-based calendar functions. We did not write this class, and the source
+  code can be found at https://momentjs.com/
+  ***/
+
+
 ;(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :

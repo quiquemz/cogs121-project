@@ -1,4 +1,12 @@
 $(document).ready(() => {
+  
+  /***
+  File: recipe.js
+  Description: The dynamic functionality of the recipe page. Given a recipeId (retrieved as a GET variable)
+  we pull the recipe ingredients, instructions, pictures, and nutritional information. We display the nutritional
+  information (Carbs, Fat, Protein) as a pie chart data visualization at the bottom of the page.
+  ***/
+
   /*** Constants & global variables ***/
   const d3 = Plotly.d3;
   const WIDTH_IN_PERCENT_OF_PARENT = 90,

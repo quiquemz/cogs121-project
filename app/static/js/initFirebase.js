@@ -1,4 +1,11 @@
 $(document).ready(function() {
+  
+  /***
+  File: initFirebase.js
+  Description: This file contains the configuration settings and keys necessary to
+  connect to firebase resources such as the database and login system.
+  ***/
+
   // Initialize Firebase
   const config = {
     apiKey: "AIzaSyA-x_cU9s1GL2PNsOJitfG2_vZ9rmOLlE8",

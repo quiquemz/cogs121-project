@@ -1,4 +1,11 @@
 $(document).ready(function() {
+  
+  /***
+  File: sidebar.js
+  Description: Adding event handlers to the tabs of the sidebar, like toggling the sidebar menu, signing up, and
+  logging out.
+  ***/
+
   /*** Firebase user management ***/
   const auth = firebase.auth();
 
