@@ -1,4 +1,12 @@
 $(document).ready(() => {
+  
+  /***
+  File: recipe.js
+  Description: The dynamic functionality of the recipe page. Given a recipeId (retrieved as a GET variable)
+  we pull the recipe ingredients, instructions, pictures, and nutritional information. We display the nutritional
+  information (Carbs, Fat, Protein) as a pie chart data visualization at the bottom of the page.
+  ***/
+
   /*** Constants & global variables ***/
   const d3 = Plotly.d3;
   const WIDTH_IN_PERCENT_OF_PARENT = 90,
@@ -102,10 +110,18 @@ $(document).ready(() => {
   }
 
   function populateNutritionChart(labels, values) {
+    var customColors = ['rgb(56, 75, 126)', 'rgb(18, 36, 37)', 'rgb(34, 53, 101)'];
+
     const data = [{
       values: values,
       labels: labels,
-      type: 'pie'
+      type: 'pie',
+      marker: {
+        colors: customColors
+      },
+      insidetextfont: {
+        color: 'rgb(255, 255, 255)'
+      }
     }];
     const recipesPie = d3.select("div[id='nutrition-chart']").node();
 

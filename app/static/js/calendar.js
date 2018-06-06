@@ -162,8 +162,9 @@ $(document).ready(function() {
 
         var displayNum = 0;
         var recipeList = Object.keys(recipes);
-        if (recipeList.length < 5)
-          displayNum = recipeList.length;
+        var actualRecipeListLength = recipeList.length/2;
+        if (actualRecipeListLength < 5)
+          displayNum = actualRecipeListLength;
         else
           displayNum = 5;
 
@@ -174,7 +175,7 @@ $(document).ready(function() {
           $('#myModalList').append(`<li class="list-group-item" id="${recipeId}">${recipeTitle}</li>`);
           $('#' + recipeId).click(addRecipeItemCallback(recipeId, type, recipeTitle));
         }
-        if (displayNum < recipeList.length) {
+        if (displayNum < actualRecipeListLength) {
           $('#myModalList').append(`<li class="list-group-item" id="load-more">Load More</li>`);
           $('#load-more').on('click', () => loadMoreFavorites(recipes, type, recipeList, displayNum));
         }
@@ -202,6 +203,8 @@ $(document).ready(function() {
   });
 
   /*** Event Handlers ***/
+  $('.right-header-btn').on('click', () => window.location.href = '/grocerylist');
+
   $('.add-breakfast-btn').on('click', () => toggleModal('breakfast'));
   $('.add-lunch-btn').on('click', () => toggleModal('lunch'));
   $('.add-dinner-btn').on('click', () => toggleModal('dinner'));

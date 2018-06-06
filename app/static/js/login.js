@@ -1,5 +1,11 @@
-// TODO If user is signed in REDIRECT to home. Do NOT show login form.
 $(document).ready(function() {
+
+  /***
+  File: login.js
+  Description: Takes user email and password and tries to authenticate the session
+  through firebase.
+  ***/
+
   /*** Firebase Auth and DB ***/
   const auth = firebase.auth();
   const db = firebase.database();

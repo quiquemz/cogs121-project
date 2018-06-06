@@ -26,23 +26,23 @@ $(document).ready(function() {
       // Get user database snapshot
       db.ref(`/users/${auth.currentUser.uid}/favoriteRecipes`).once("value", res => {
         const recipes = res.val();
-
-        var recipeList = Object.keys(recipes);
-
-        for (let i = 0; i < recipeList.length; i++) {
-          loadRecipe(recipeId);
-          var recipeId = recipeList[i];
-          var recipeTitle = recipes[recipeId];
-
-          //$('#myList').append(`<li class="list-group-item" id="${recipeId}">${recipeTitle}</li>`);
-          //$('#' + recipeId).click(viewRecipe(recipeId));
+        if (recipes) {
+          $('.favorites-empty-state').hide();
+          var recipeList = Object.keys(recipes);
+          for (let i = 0; i < recipeList.length/2; i++) {
+            var recipeId = recipeList[i];
+            var recipeTitle = recipes[recipeId];
+            loadRecipe(recipeId);
+          }
         }
+        else 
+          $('.favorites-empty-state').show();
       });
     }
   }
 
-
   function loadRecipe(recipeId) {
+    recipeId = recipeId.substring(0, 6);
     const URL = `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${recipeId}/information`;
 
     $.ajax({
@@ -77,7 +77,7 @@ $(document).ready(function() {
     imageCard.data('recipeSourceUrl', recipe.sourceUrl);
     imageCard.data('recipeId', recipe.id);
     $('#cuisine').css('text-transform', 'capitalize');
-    $('.container').append(imageCard);
+    $('.favorites-list').append(imageCard);
     $('#' + recipe.id).on('click', viewRecipe(recipe.id));
   }
 

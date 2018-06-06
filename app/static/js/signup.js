@@ -1,5 +1,11 @@
-// TODO If user is signed in REDIRECT to home. Do NOT show signup form.
 $(document).ready(function() {
+  
+  /***
+  File: signup.js
+  Description: Allows the user to input their email and password, and store them in our firebase authentication database.
+  Upon successful completion, the user is redirected the main discovery page to start finding recipes.
+  ***/
+
   /*** Firebase Auth and DB ***/
   const auth = firebase.auth();
   const db = firebase.database();
