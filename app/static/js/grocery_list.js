@@ -1,3 +1,12 @@
+/*
+  File: grocery_list.js
+  Author: Saul Mendez, Akanksha Kevalramani, Adam Abadilla
+  Description: This file is to handle the events that occur on the grocery_list.
+  This file should only be invoked by the grocery_list view. It contains the
+  necessary code to access the user, the DB, and to retrieve the recipes saved on
+  a specific week/day.
+*/
+
 $(document).ready(() => {
 
   /*** Global and Constant Variables ***/

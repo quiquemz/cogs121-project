@@ -1,3 +1,13 @@
+/*
+  File: header.js
+  Author: Saul Mendez, Akanksha Kevalramani, Adam Abadilla
+  Description: This file containes the main code to dynamically build the header
+  of the views. This was necessary so that we did not have to manually set the
+  names, buttons and function invokations. All the views that use a header, should
+  add this file to their sources. Note that it is needed to add some markup
+  code to the files to (see index.html for an example).
+*/
+
 $(document).ready(function() {
 
   // Function definitions
@@ -52,5 +62,6 @@ $(document).ready(function() {
   // Plain Function Invokations
   initializeHeader(getCurrentPage());
 
+  // Event Handlers
   $('.left-header-btn').on('click', () => goBack());
 });

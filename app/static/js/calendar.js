@@ -1,3 +1,13 @@
+/*
+  File: calendar.js
+  Author: Saul Mendez, Akanksha Kevalramani, Adam Abadilla
+  Description: This file is to handle the events that occur on the calendar view.
+  This file should only be invoked by the calendar view. It contains the
+  necessary code to access the user, the DB, and to retrieve the recipes to cook
+  of an specific day/week. When setting the desired week, all the necessary code
+  is invoked to build the page.
+*/
+
 $(document).ready(function() {
   /*** Global and Constant Variables ***/
   const WEEK_DESCRIPTION = 'D MMM'; // Formats to display moment
@@ -68,7 +78,7 @@ $(document).ready(function() {
       </li>`);
 
     listItem.find('.name').on('click', () => window.location.replace(`${window.location.origin}/recipe/${id}`));
-    listItem.find('.remove-recipe-btn').on('click', (e) => removeRecipeItem(e, meal, id));
+    listItem.find('.remove-recipe-btn').on('click', (e) => removeRecipeItemDB(e, meal, id));
 
     $(`.list-${meal}`).append(listItem);
 
@@ -81,7 +91,14 @@ $(document).ready(function() {
       });
   }
 
-  function removeRecipeItem(e, meal, id) {
+  function addGroceryDB(id, meal, name) {
+    db.ref(`/users/${auth.currentUser.uid}/calendar/${currentMoment.format(DB_DATE)}/${meal}`)
+      .update({
+        [id]: name
+      });
+  }
+
+  function removeRecipeItemDB(e, meal, id) {
     $(e.target).closest('.list-group-item').remove();
     db.ref(`/users/${auth.currentUser.uid}/calendar/${currentMoment.format(DB_DATE)}/${meal}/${id}`).remove();
   }

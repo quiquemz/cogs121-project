@@ -1,3 +1,12 @@
+/*
+  File: favorites.js
+  Author: Saul Mendez, Akanksha Kevalramani, Adam Abadilla
+  Description: This file is to handle the events that occur on the favorites view.
+  This file should only be invoked by the favorites view. It contains the
+  necessary code to access the user, the DB, and to retrieve the favorite recipes
+  of the specific user.
+*/
+
 $(document).ready(function() {
 
   /*** Firebase Auth and DB ***/
