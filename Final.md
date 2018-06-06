@@ -12,6 +12,7 @@ C. Saul Mendez
 D. Zongchen Teng 
 
 === TASK LIST ===
+
 Akanksha Kevalramani: Akanksha worked alot in the assignment, she has been doing most of the Figma as well as alot of front end design. 
 
 
