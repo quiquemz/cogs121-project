@@ -1,10 +1,10 @@
-=== TEAM MEMBER === 
+###=== TEAM MEMBER === 
 A. Akanksha Kevalramani
 B. Adam Abadilla
 C. Saul Mendez
 D. Zongchen Teng 
 
-=== TASK LIST ===
+###=== TASK LIST ===
 Akanksha Kevalramani: Akanksha worked alot in the assignment, she has been doing most of the Figma as well as alot of front end design. 
 
 Adam Abadilla: You did the data visualization as well as coded alot of the application. Also worked on the database with Saul
