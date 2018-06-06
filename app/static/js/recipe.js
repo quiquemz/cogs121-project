@@ -1,5 +1,8 @@
 $(document).ready(() => {
   /*** Constants & global variables ***/
+  const d3 = Plotly.d3;
+  const WIDTH_IN_PERCENT_OF_PARENT = 90,
+    HEIGHT_IN_PERCENT_OF_PARENT = 50;
 
   /*** Firebase Auth and DB ***/
   const auth = firebase.auth();
@@ -21,7 +24,6 @@ $(document).ready(() => {
         createRecipeImageCard(data);
         createRecipeIngredients(data);
         createRecipeInstructions(data);
-        console.log(data);
       }
     });
   }
@@ -76,8 +78,8 @@ $(document).ready(() => {
     $('.instructions').append(ol)
   }
 
-function getNutritionInfo(recipeId) {
-    
+  function getNutritionInfo(recipeId) {
+
     $.ajax({
       url: `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${recipeId}/information?includeNutrition=true`,
       type: 'GET',
@@ -89,9 +91,10 @@ function getNutritionInfo(recipeId) {
 
         var labels = ["Carbs", "Fat", "Protein"];
         var values = [data.nutrition.caloricBreakdown.percentCarbs,
-                      data.nutrition.caloricBreakdown.percentFat,
-                      data.nutrition.caloricBreakdown.percentProtein];
-        
+          data.nutrition.caloricBreakdown.percentFat,
+          data.nutrition.caloricBreakdown.percentProtein
+        ];
+
         populateNutritionChart(labels, values);
 
       }
@@ -99,24 +102,24 @@ function getNutritionInfo(recipeId) {
   }
 
   function populateNutritionChart(labels, values) {
-
-    var data = [{
+    const data = [{
       values: values,
       labels: labels,
       type: 'pie'
     }];
+    const recipesPie = d3.select("div[id='nutrition-chart']").node();
 
-    var layout = {
-      height: 400,
-      width: 500
-    };
-
-    Plotly.newPlot('nutrition-chart', data, layout);
+    Plotly.newPlot(recipesPie, data);
+    window.addEventListener('resize', function() {
+      Plotly.Plots.resize(recipesPie);
+    });
+    // Plotly.newPlot('nutrition-chart', data, layout);
   }
 
   /*** Initializer ***/
   loadRecipe();
 
   /*** Event Handlers ***/
+
 
 });
