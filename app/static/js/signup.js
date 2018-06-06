@@ -1,7 +1,8 @@
 $(document).ready(function() {
-  
+
   /***
   File: signup.js
+  Author: Saul Mendez, Akanksha Kevalramani, Adam Abadilla
   Description: Allows the user to input their email and password, and store them in our firebase authentication database.
   Upon successful completion, the user is redirected the main discovery page to start finding recipes.
   ***/
@@ -23,21 +24,23 @@ $(document).ready(function() {
     auth.createUserWithEmailAndPassword(email, password)
       .then(res => {
         firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                const uid = res.user.uid;
-                writeUserDataDB(uid, email);
-                user.getIdToken().then(function(idToken) {  //idToken is the user's firebase token
-                   $.ajax({
-                     url: '/',
-                     type: 'GET', 
-                     headers: {'Authorization': 'Bearer ' + idToken },
-                     success: (status) => {
-                       if (status == 'Login Successful')
-                         window.location.href = "/discover"
-                     }
-                   });
-                });
-            }
+          if (user) {
+            const uid = res.user.uid;
+            writeUserDataDB(uid, email);
+            user.getIdToken().then(function(idToken) { //idToken is the user's firebase token
+              $.ajax({
+                url: '/',
+                type: 'GET',
+                headers: {
+                  'Authorization': 'Bearer ' + idToken
+                },
+                success: (status) => {
+                  if (status == 'Login Successful')
+                    window.location.href = "/discover"
+                }
+              });
+            });
+          }
         });
       })
       .catch(e => {

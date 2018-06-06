@@ -1,7 +1,8 @@
 $(document).ready(function() {
-  
+
   /***
   File: initFirebase.js
+  Author: Saul Mendez, Akanksha Kevalramani, Adam Abadilla
   Description: This file contains the configuration settings and keys necessary to
   connect to firebase resources such as the database and login system.
   ***/

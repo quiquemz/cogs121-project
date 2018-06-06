@@ -2,9 +2,10 @@ $(document).ready(() => {
 
   /***
   File: index.js
+  Author: Saul Mendez, Akanksha Kevalramani, Adam Abadilla
   Description: The dynamic functionality of the recipe discover (index) page. All the functionality
   of generating recipe cards, the swiping gestures, and adding to favorites are here. We interact
-  with the spoonacular API to pull in a continuous stream of random recipes for the user to 
+  with the spoonacular API to pull in a continuous stream of random recipes for the user to
   swipe through. There is a modal to allow users to directly add a recipe to their calendar.
   ***/
 
@@ -104,7 +105,7 @@ $(document).ready(() => {
 
       // Format ingredients
       var ingredients = [];
-      if(recipe.extendedIngredients) {
+      if (recipe.extendedIngredients) {
         recipe.extendedIngredients.forEach(function(ingredient) {
           var ilist = [ingredient.name, ingredient.amount, ingredient.unit];
           ingredients.push(ilist);
@@ -175,7 +176,7 @@ $(document).ready(() => {
         .child('favoriteRecipes')
         .update({
           [recipeId]: recipeTitle,
-          [recipeId + "Ingredients"] : ingredients
+          [recipeId + "Ingredients"]: ingredients
         });
     }
   }

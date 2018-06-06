@@ -1,7 +1,8 @@
 $(document).ready(() => {
-  
+
   /***
   File: recipe.js
+  Author: Saul Mendez, Akanksha Kevalramani, Adam Abadilla
   Description: The dynamic functionality of the recipe page. Given a recipeId (retrieved as a GET variable)
   we pull the recipe ingredients, instructions, pictures, and nutritional information. We display the nutritional
   information (Carbs, Fat, Protein) as a pie chart data visualization at the bottom of the page.

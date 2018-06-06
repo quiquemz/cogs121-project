@@ -1,7 +1,8 @@
 $(document).ready(function() {
-  
+
   /***
   File: sidebar.js
+  Author: Saul Mendez, Akanksha Kevalramani, Adam Abadilla
   Description: Adding event handlers to the tabs of the sidebar, like toggling the sidebar menu, signing up, and
   logging out.
   ***/
