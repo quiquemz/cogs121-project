@@ -17,19 +17,19 @@ admin.initializeApp({
 });
 
 /************** Routes **************/
-app.get('/', function (req, res) {
+app.get('/', function(req, res) {
   var idToken = '';
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer '))
-  	idToken = req.headers.authorization.split('Bearer ')[1];
+    idToken = req.headers.authorization.split('Bearer ')[1];
 
   admin.auth().verifyIdToken(idToken)
-  .then(function(decodedToken) {
-    var uid = decodedToken.uid;
-    res.send('Login Successful');
-  }).catch(function(error) {
-  	res.redirect('/home');
-    res.send('Login Failed');
-  });
+    .then(function(decodedToken) {
+      var uid = decodedToken.uid;
+      res.send('Login Successful');
+    }).catch(function(error) {
+      res.redirect('/home');
+      res.send('Login Failed');
+    });
 
 });
 
@@ -45,7 +45,7 @@ app.get('/calendar', (req, res) => res.sendfile('static/calendar.html'));
 
 app.get('/favorites', (req, res) => res.sendfile('static/favorites.html'));
 
-app.get('/grocerylist', (req, res) => res.sendfile(''));
+app.get('/grocerylist', (req, res) => res.sendfile('static/grocery_list.html'));
 
 app.get('/recipe/:recipeId', (req, res) => res.sendfile('static/recipe.html'));
 
