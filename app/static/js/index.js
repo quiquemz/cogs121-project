@@ -68,7 +68,7 @@ $(document).ready(() => {
             </div>
           </div>
           <div class="r-card-secondary-content">
-            <span class="r-card-text">${recipe.cuisines.concat(recipe.diets).join(', ')}</span>
+            <span class="r-card-text cuisine">${recipe.cuisines.concat(recipe.diets).join(', ')}</span>
             <div class="r-card-time">
               <div class="clock-icon">
                 <i class="far fa-clock"></i>
@@ -82,6 +82,8 @@ $(document).ready(() => {
     if (recipe.image) {
       card.css('background', `url(${recipe.image}) ${backgroundCSS}`);
       card.css('background-size', backgroundSizeCSS);
+      $('.r-card-title').css('text-transform', 'capitalize');
+      $('.cuisine').css('text-transform', 'capitalize');
 
       card.data('recipeTitle', recipe.title);
       card.data('recipeSourceUrl', recipe.sourceUrl);

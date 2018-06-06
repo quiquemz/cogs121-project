@@ -185,6 +185,8 @@ $(document).ready(function() {
   });
 
   /*** Event Handlers ***/
+  $('.right-header-btn').on('click', () => window.location.href = '/grocerylist');
+
   $('.add-breakfast-btn').on('click', () => toggleModal('breakfast'));
   $('.add-lunch-btn').on('click', () => toggleModal('lunch'));
   $('.add-dinner-btn').on('click', () => toggleModal('dinner'));

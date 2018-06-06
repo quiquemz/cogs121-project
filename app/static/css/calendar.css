@@ -105,3 +105,8 @@ hr {
   border-style: line;
   border-color: rgba(0,0,0,.125)
 }
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+}

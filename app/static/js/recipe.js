@@ -111,8 +111,8 @@ function getNutritionInfo(recipeId) {
     }];
 
     var layout = {
-      height: 200,
-      width: 200
+      height: 400,
+      width: 500
     };
 
     Plotly.newPlot('nutrition-chart', data, layout);
