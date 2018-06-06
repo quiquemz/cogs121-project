@@ -45,7 +45,7 @@ app.get('/calendar', (req, res) => res.sendfile('static/calendar.html'));
 
 app.get('/favorites', (req, res) => res.sendfile('static/favorites.html'));
 
-app.get('/grocerylist', (req, res) => res.sendfile(''));
+app.get('/grocerylist', (req, res) => res.sendfile('static/grocery_list.html'));
 
 app.get('/recipe/:recipeId', (req, res) => res.sendfile('static/recipe.html'));
 

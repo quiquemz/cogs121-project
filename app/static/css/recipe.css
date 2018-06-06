@@ -55,3 +55,7 @@
   font-size: 0.8em;
   padding-top: 2px;
 }
+
+.plotly div {
+  width: 50vw;
+}

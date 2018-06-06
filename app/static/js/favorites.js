@@ -24,9 +24,6 @@ function initializeFavorites() {
       loadRecipe(recipeId);
       var recipeId = recipeList[i];
       var recipeTitle = recipes[recipeId];
-      
-      //$('#myList').append(`<li class="list-group-item" id="${recipeId}">${recipeTitle}</li>`);
-      //$('#' + recipeId).click(viewRecipe(recipeId));
     }
     });
   }

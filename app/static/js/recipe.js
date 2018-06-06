@@ -99,16 +99,20 @@ function getNutritionInfo(recipeId) {
   }
 
   function populateNutritionChart(labels, values) {
+    var customColors = ['rgb(56, 75, 126)', 'rgb(18, 36, 37)', 'rgb(34, 53, 101)'];
 
     var data = [{
       values: values,
       labels: labels,
-      type: 'pie'
+      type: 'pie',
+      marker: {
+        colors: customColors
+      }
     }];
 
     var layout = {
-      height: 400,
-      width: 500
+      height: 200,
+      width: 200
     };
 
     Plotly.newPlot('nutrition-chart', data, layout);
