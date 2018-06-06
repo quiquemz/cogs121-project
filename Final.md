@@ -51,6 +51,8 @@
 
 # VIDEO LINK
 
+https://youtu.be/FjrDMOF_PIg
+
 # FINAL WORDS 
 
 Team Reciprep would like to say thank you for a wonderful quarter to the TAs and Professor Guo. 
