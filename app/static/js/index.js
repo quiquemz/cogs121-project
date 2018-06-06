@@ -93,11 +93,12 @@ $(document).ready(() => {
 
       // Format ingredients
       var ingredients = [];
-      recipe.extendedIngredients.forEach(function(ingredient) {
-        var ilist = [ingredient.name, ingredient.amount, ingredient.unit];
-        ingredients.push(ilist);
-
-      });
+      if(recipe.extendedIngredients) {
+        recipe.extendedIngredients.forEach(function(ingredient) {
+          var ilist = [ingredient.name, ingredient.amount, ingredient.unit];
+          ingredients.push(ilist);
+        });
+      }
       card.data('recipeIngredients', ingredients);
 
       card.on('click', () => {
@@ -109,7 +110,8 @@ $(document).ready(() => {
           image: recipe.image,
           cuisines: recipe.cuisines,
           diets: recipe.diets,
-          readyInMinutes: recipe.readyInMinutes
+          readyInMinutes: recipe.readyInMinutes,
+          extendedIngredients: recipe.extendedIngredients
         }));
       });
 
