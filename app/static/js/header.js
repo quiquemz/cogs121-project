@@ -24,9 +24,8 @@ $(document).ready(function() {
         $('.left-header-btn').append('<i class="fa fa-chevron-left"></i>').css('color', '#363046');
         break;
       case '/calendar':
-        $('#header').css('background', '#363046').css('color', '#FFF');
-        $('.left-header-btn').css('color', '#FFF');
-        $('.right-header-btn').css('color', '#FFF').append('<i class="fa fa-list-alt"></i>');
+        $('#header').css('background', '#FDFDFD').css('color', '#363046');
+        $('.right-header-btn').css('color', '#363046').append('<i class="fa fa-list-alt"></i>');
         break;
       default:
         $('#header').css('background', '#FDFDFD');
@@ -40,8 +39,7 @@ $(document).ready(function() {
     var currentPage = getCurrentPage();
     if (currentPage == '/login' || currentPage == '/signup') {
       window.location.href = '/home';
-    }
-    else if (currentPage.match('recipe') == 'recipe') {
+    } else if (currentPage.match('recipe') == 'recipe') {
       //console.log(window.location.search.substring(1).split("?")[0]);
       var comingFromFavorites = window.location.search.substring(1).split("?")[0];
       if (comingFromFavorites == 'favorites')

@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <!-- Custom Specific CSS -->
-    <link rel="stylesheet" href="css/favorites.css">
+    <link rel="stylesheet" href="css/grocery_list.css">
 
     <!-- Firebase App is always required and must be first -->
     <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-app.js"></script>
@@ -60,7 +60,7 @@
         <ul class="list-unstyled">
           <li><a href="/discover">Discover</a></li>
           <li><a href="/calendar">Calendar</a></li>
-          <li class="active"><a href="/grocerylist">Grocery List</a></li>
+          <li class="active"><a href="#">Grocery List</a></li>
           <li><a href="/favorites">Favorites</a></li>
         </ul>
 
@@ -83,7 +83,31 @@
       <div id="content">
         <div class="container">
 
-          <ul id="grocery-list" class="list-group"></ul>
+          <!--
+          <div class="row week-slider">
+            <div class="col prev-week-btn">
+              <i class="fa fa-angle-left"></i>
+            </div>
+            <div class="col-6 week-name">
+            </div>
+            <div class="col next-week-btn">
+              <i class="fa fa-angle-right"></i>
+            </div>
+          </div>
+
+          <div class="row week-description">
+            <div class="week-start-day">
+
+            </div>
+            <span class="dash"> - </span>
+            <div class="week-end-day">
+
+            </div>
+          </div> -->
+
+          <h5 style="font-weight: 1000">Grocery List</h5>
+
+          <ul class="list-group grocery-list"></ul>
 
         </div>
       </div>

@@ -1,7 +1,7 @@
 $(document).ready(function() {
   /*** Global and Constant Variables ***/
   const WEEK_DESCRIPTION = 'D MMM'; // Formats to display moment
-  const LONG_WEEK_DAY = 'dddd';
+  const LONG_WEEK_DAY = 'dddd, MMMM D';
   const DB_DATE = 'MM-DD-YYYY';
 
   const currentMoment = moment(); // To track current date
@@ -125,7 +125,7 @@ $(document).ready(function() {
     for (let i = originalDisplayNum; i < displayNum; i++) {
       var recipeId = recipeList[i];
       var recipeTitle = recipes[recipeId];
-      
+
       $('#myModalList').append(`<li class="list-group-item" id="${recipeId}">${recipeTitle}</li>`);
       $('#' + recipeId).click(addRecipeItemCallback(recipeId, type, recipeTitle));
     }
@@ -143,24 +143,24 @@ $(document).ready(function() {
       db.ref(`/users/${auth.currentUser.uid}/favoriteRecipes`).once("value", res => {
         const recipes = res.val();
 
-      var displayNum = 0;
-      var recipeList = Object.keys(recipes);
-      if (recipeList.length < 5)
-        displayNum = recipeList.length;
-      else
-        displayNum = 5;
+        var displayNum = 0;
+        var recipeList = Object.keys(recipes);
+        if (recipeList.length < 5)
+          displayNum = recipeList.length;
+        else
+          displayNum = 5;
 
-      for (let i = 0; i < displayNum; i++) {
-        var recipeId = recipeList[i];
-        var recipeTitle = recipes[recipeId];
-        
-        $('#myModalList').append(`<li class="list-group-item" id="${recipeId}">${recipeTitle}</li>`);
-        $('#' + recipeId).click(addRecipeItemCallback(recipeId, type, recipeTitle));
-      }
-      if (displayNum < recipeList.length) {
-        $('#myModalList').append(`<li class="list-group-item" id="load-more">Load More</li>`);
-        $('#load-more').on('click', () => loadMoreFavorites(recipes, type, recipeList, displayNum));
-      }
+        for (let i = 0; i < displayNum; i++) {
+          var recipeId = recipeList[i];
+          var recipeTitle = recipes[recipeId];
+
+          $('#myModalList').append(`<li class="list-group-item" id="${recipeId}">${recipeTitle}</li>`);
+          $('#' + recipeId).click(addRecipeItemCallback(recipeId, type, recipeTitle));
+        }
+        if (displayNum < recipeList.length) {
+          $('#myModalList').append(`<li class="list-group-item" id="load-more">Load More</li>`);
+          $('#load-more').on('click', () => loadMoreFavorites(recipes, type, recipeList, displayNum));
+        }
       });
     }
   }
@@ -194,5 +194,6 @@ $(document).ready(function() {
   $('.prev-week-btn').on('click', () => setWeek('prev'));
   $('.next-week-btn').on('click', () => setWeek('next'));
 
+  $('.right-header-btn').on('click', () => window.location.replace(`${window.location.origin}/grocerylist`));
   $('.day-btn').on('click', (e) => setCurrentWeekDay(e));
 });

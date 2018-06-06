@@ -1,56 +1,100 @@
 $(document).ready(() => {
 
-	/*** Firebase Auth and DB ***/
-	const auth = firebase.auth();
-	const db = firebase.database();
+  /*** Global and Constant Variables ***/
+  const WEEK_DESCRIPTION = 'D MMM'; // Formats to display moment
+  const LONG_WEEK_DAY = 'dddd, MMMM D';
+  const DB_DATE = 'MM-DD-YYYY';
 
-	function getCalendarIngredients() {
+  const currentMoment = moment(); // To track current date
 
+  /*** Firebase Auth and DB ***/
+  const auth = firebase.auth();
+  const db = firebase.database();
 
-		db.ref(`/users/${auth.currentUser.uid}/favoriteRecipes`).once('value', 
-			function(snapshot){
+  /*** Function definitions ***/
+  function setWeek(week) {
+    if (week === 'prev') {
+      currentMoment.subtract(1, 'week');
+    } else if (week === 'next') {
+      currentMoment.add(1, 'week');
+    }
+    setWeekName();
+    setWeekStartDay();
+    setWeekEndDay();
+  }
 
-				ingredientsMap = {}
+  function setWeekName() {
+    const m = moment();
+    if (currentMoment.isSame(m, 'isoWeek')) {
+      $('.week-name').html('<h5>This Week</h5>');
+    } else if (currentMoment.isBefore(m, 'isoWeek')) {
+      $('.week-name').html(`<h5>${m.diff(currentMoment, 'weeks')} Weeks Ago</h5>`);
+    } else {
+      // HACK: added 1 mannualy... double check
+      $('.week-name').html(`<h5>${currentMoment.diff(m, 'weeks') + 1} Weeks After</h5>`);
+    }
+  }
 
-    			snapshot.forEach(function(child){
+  function setWeekStartDay() {
+    const cmCopy = currentMoment.clone(); // moment() is mutable
+    $('.week-start-day').html(cmCopy.isoWeekday(1).format(WEEK_DESCRIPTION));
+  }
 
-	        		var key = child.key;
-    				if(key.endsWith("Ingredients")) {
+  function setWeekEndDay() {
+    const cmCopy = currentMoment.clone(); // moment() is mutable
+    $('.week-end-day').html(cmCopy.isoWeekday(7).format(WEEK_DESCRIPTION));
+  }
 
-    					var ingredientList = child.val();
-    					var i;
-    					for(i = 0; i < ingredientList.length; i++) {
+  function getCalendarIngredients() {
+    db.ref(`/users/${auth.currentUser.uid}/favoriteRecipes`).once('value',
+      function(snapshot) {
 
-    						// Array containing name and quantity from db
-    						var thisIngredient = ingredientList[i];
-    						
-    						// Ingredient name
-    						var type = thisIngredient[0];
+        ingredientsMap = {}
 
-    						// Quantity and Units
-    						var formattedQuantity = thisIngredient[1] + " " + thisIngredient[2];
-    						
-    						// Append to grocery list
-							ingredientsMap[type] = formattedQuantity;
+        snapshot.forEach(function(child) {
 
-    					}
-    				}
-    			});
+          var key = child.key;
+          if (key.endsWith("Ingredients")) {
 
-				// Add to webpage
-				Object.keys(ingredientsMap).forEach(function(key) {
-					$("#grocery-list").append('<li class="list-group-item">' + key + ' (' + ingredientsMap[key] + ')</li>');
-				})
-    			
-    		});
+            var ingredientList = child.val();
+            var i;
+            for (i = 0; i < ingredientList.length; i++) {
 
-	}
+              // Array containing name and quantity from db
+              var thisIngredient = ingredientList[i];
 
-  	/*** Initializers ***/
-  	firebase.auth().onAuthStateChanged(user => {
-  		if (user) {
-    		getCalendarIngredients();
-  		}
-	});
+              // Ingredient name
+              var type = thisIngredient[0];
+
+              // Quantity and Units
+              var formattedQuantity = thisIngredient[1] + " " + thisIngredient[2];
+
+              // Append to grocery list
+              ingredientsMap[type] = formattedQuantity;
+
+            }
+          }
+        });
+
+        // Add to webpage
+        Object.keys(ingredientsMap).forEach(function(key) {
+          $(".grocery-list").append('<li class="list-group-item">' + key + ' (' + ingredientsMap[key] + ')</li>');
+        })
+
+      });
+
+  }
+
+  /*** Initializers ***/
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      setWeek();
+      getCalendarIngredients();
+    }
+  });
+
+  /*** Event Handlers ***/
+  $('.prev-week-btn').on('click', () => setWeek('prev'));
+  $('.next-week-btn').on('click', () => setWeek('next'));
 
 });
