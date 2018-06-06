@@ -110,6 +110,9 @@ $(document).ready(() => {
       type: 'pie',
       marker: {
         colors: customColors
+      },
+      insidetextfont: {
+        color: 'rgb(255, 255, 255)'
       }
     }];
     const recipesPie = d3.select("div[id='nutrition-chart']").node();
