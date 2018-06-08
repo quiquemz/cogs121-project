@@ -1,13 +1,19 @@
-$(document).ready(() => {
+/***
+File: index.js
+Author: Saul Mendez, Akanksha Kevalramani, Adam Abadilla
+Description: The dynamic functionality of the recipe discover (index) page. All the functionality
+of generating recipe cards, the swiping gestures, and adding to favorites are here. We interact
+with the spoonacular API to pull in a continuous stream of random recipes for the user to
+swipe through. There is a modal to allow users to directly add a recipe to their calendar.
+***/
 
-  /***
-  File: index.js
-  Author: Saul Mendez, Akanksha Kevalramani, Adam Abadilla
-  Description: The dynamic functionality of the recipe discover (index) page. All the functionality
-  of generating recipe cards, the swiping gestures, and adding to favorites are here. We interact
-  with the spoonacular API to pull in a continuous stream of random recipes for the user to
-  swipe through. There is a modal to allow users to directly add a recipe to their calendar.
-  ***/
+$(document).ready(() => {
+  /*** Global and Constant Variables ***/
+  const WEEK_DESCRIPTION = 'D MMM'; // Formats to display moment
+  const LONG_WEEK_DAY = 'dddd, MMMM D';
+  const DB_DATE = 'MM-DD-YYYY';
+
+  const currentMoment = moment(); // To track current date
 
   /*** Constants & global variables ***/
   const LEFT = 0;
@@ -19,46 +25,21 @@ $(document).ready(() => {
   /*** Firebase Auth and DB ***/
   const auth = firebase.auth();
   const db = firebase.database();
-
   /*** Function definitions ***/
   function initializeIndexView() {
     try {
       const recipe = JSON.parse(localStorage.getItem('currentRecipe'));
 
       $('.r-cards-container').append(createCard(recipe, IN));
-      getRandomRecipes(true, 9);
+      getRandomRecipesAPI(true, 9);
 
       localStorage.setItem("currentRecipe", "");
       localStorage.setItem("removedRecipes", "[]");
     } catch (error) {
-      getRandomRecipes(true, 10);
+      getRandomRecipesAPI(true, 10);
 
       localStorage.setItem("currentRecipe", "");
       localStorage.setItem("removedRecipes", "[]");
-    }
-  }
-
-  function getRandomRecipes(user, ammount) {
-    const URL = `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=${ammount}`;
-
-    if (user) {
-      $.ajax({
-        url: URL,
-        type: 'GET',
-        dataType: 'json',
-        headers: {
-          'X-Mashape-Key': 'fE0JDoXOrQmshCwRo1DwJRH2XhXKp1YnYEAjsnBx1IKReJz2Bv'
-        },
-        success: (data) => {
-          data.recipes.forEach(recipe => {
-            const card = createCard(recipe, IN);
-
-            if (card) {
-              $('.r-cards-container').prepend(card);
-            }
-          });
-        }
-      });
     }
   }
 
@@ -164,23 +145,6 @@ $(document).ready(() => {
     }
   }
 
-  function addToFavoritesDB() {
-    const card = $('.r-card:last-child');
-
-    if (auth.currentUser) {
-      const recipeTitle = card.data('recipeTitle');
-      const recipeId = card.data('recipeId');
-      const ingredients = card.data('recipeIngredients');
-
-      db.ref('users/' + auth.currentUser.uid)
-        .child('favoriteRecipes')
-        .update({
-          [recipeId]: recipeTitle,
-          [recipeId + "Ingredients"]: ingredients
-        });
-    }
-  }
-
   function slideCard(direction) {
     const user = auth.currentUser;
     const card = $('.r-card:last-child');
@@ -220,38 +184,16 @@ $(document).ready(() => {
 
     removedRecipes.push(recipeToRemove);
     localStorage.setItem('removedRecipes', JSON.stringify(removedRecipes)); // removing from local storage
-    getRandomRecipes(auth.currentUser, 1);
+    getRandomRecipesAPI(auth.currentUser, 1);
+    console.log(1)
   }
 
   function toggleModal(action) {
     removeFirstCard();
 
     if (action === "save") {
-      var dateObj = $('#datetimepicker12').data("DateTimePicker").date();
-      var date = dateObj['_d'].getDate();
-      var month = dateObj['_d'].getMonth() + 1;
-      var year = dateObj['_d'].getYear() - 100 + 2000;
-
-      if (month < 10)
-        month = '0' + month;
-      if (date < 10)
-        date = '0' + date;
-
-      var meal = $("#meals-tab .active").text().replace(/\s/g, '').toLowerCase();
-      var firebaseDateObj = "" + month + "-" + date + "-" + year;
-
-      const recipeTitle = $('.r-card:last-child').data('recipeTitle');
-      const recipeId = $('.r-card:last-child').data('recipeId');
-
-      if (auth.currentUser) {
-        db.ref('users/' + auth.currentUser.uid)
-          .child('calendar')
-          .child(firebaseDateObj)
-          .child(meal)
-          .update({
-            [recipeId]: recipeTitle
-          })
-      };
+      addToCalendarDB();
+      addToGroceriesDB();
     }
 
     if (action === "close") {
@@ -260,6 +202,109 @@ $(document).ready(() => {
 
     $('#myModal').modal('toggle');
   }
+
+  function getRandomRecipesAPI(user, ammount) {
+    const URL = `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=${ammount}`;
+
+    if (user) {
+      $.ajax({
+        url: URL,
+        type: 'GET',
+        dataType: 'json',
+        headers: {
+          'X-Mashape-Key': 'fE0JDoXOrQmshCwRo1DwJRH2XhXKp1YnYEAjsnBx1IKReJz2Bv'
+        },
+        success: (data) => {
+          data.recipes.forEach(recipe => {
+            const card = createCard(recipe, IN);
+
+            if (card) {
+              $('.r-cards-container').prepend(card);
+            }
+          });
+        }
+      });
+    }
+  }
+
+  function addToFavoritesDB() {
+    const card = $('.r-card:last-child');
+
+    if (auth.currentUser) {
+      const recipeTitle = card.data('recipeTitle');
+      const recipeId = card.data('recipeId');
+
+      db.ref('users/' + auth.currentUser.uid)
+        .child('favoriteRecipes')
+        .update({
+          [recipeId]: recipeTitle
+        });
+    }
+  }
+
+  function addToCalendarDB() {
+    const dateObj = $('#datetimepicker12').data("DateTimePicker").date();
+    const year = dateObj['_d'].getYear() - 100 + 2000;
+    const recipeId = $('.r-card:last-child').data('recipeId');
+    const recipeTitle = $('.r-card:last-child').data('recipeTitle');
+    const cmCopy = currentMoment.clone(); // moment() is mutable
+    let date = dateObj['_d'].getDate();
+    let month = dateObj['_d'].getMonth() + 1;
+
+    if (month < 10)
+      month = '0' + month;
+    if (date < 10)
+      date = '0' + date;
+
+    const meal = $("#meals-tab .active").text().replace(/\s/g, '').toLowerCase();
+    const dbDateObj = "" + month + "-" + date + "-" + year;
+
+    if (auth.currentUser) {
+      // Calendar
+      db.ref(`/users/${auth.currentUser.uid}/calendar/${dbDateObj}/${meal}`)
+        .update({
+          [recipeId]: recipeTitle
+        });
+    }
+  }
+
+  function addToGroceriesDB() {
+    const recipeId = $('.r-card:last-child').data('recipeId');
+    const cmCopy = currentMoment.clone(); // moment() is mutable
+    const URL = `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${recipeId}/information`;
+
+    if (auth.currentUser) {
+      // GETTING INGREDIENTS FROM API
+      $.ajax({
+        url: URL,
+        type: 'GET',
+        dataType: 'json',
+        headers: {
+          'X-Mashape-Key': 'fE0JDoXOrQmshCwRo1DwJRH2XhXKp1YnYEAjsnBx1IKReJz2Bv'
+        },
+        success: (recipe) => {
+          const ingredients = [];
+          recipe.extendedIngredients.forEach(ingredient => {
+            ingredients.push({
+              name: ingredient.name,
+              amount: ingredient.amount,
+              unit: ingredient.unit,
+              original: ingredient.original
+            });
+          });
+
+          console.log(recipe);
+
+          // SETTING GORCERIES IN DB
+          db.ref(`/users/${auth.currentUser.uid}/groceries/${cmCopy.isoWeekday(1).format(DB_DATE)}`)
+            .update({
+              [recipeId]: ingredients
+            });
+        }
+      });
+    }
+  }
+
 
   /*** Initializer ***/
   initializeIndexView();

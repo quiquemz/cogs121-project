@@ -54,51 +54,32 @@ $(document).ready(() => {
     $('.week-end-day').html(cmCopy.isoWeekday(7).format(WEEK_DESCRIPTION));
   }
 
-  function getCalendarIngredients() {
-    db.ref(`/users/${auth.currentUser.uid}/favoriteRecipes`).once('value',
-      function(snapshot) {
-        if(snapshot.exists()) {
-          $('.non-empty-state').show();
-          $('.empty-state').hide();
+  function getThisWeeksIngredients() {
+    const cmCopy = currentMoment.clone(); // moment() is mutable
 
-          ingredientsMap = {}
+    $('.ingredient-item').remove();
 
-          snapshot.forEach(function(child) {
+    db.ref(`/users/${auth.currentUser.uid}/groceries/${cmCopy.isoWeekday(1).format(DB_DATE)}`).once('value', res => {
+      const recipes = res.val()
+      if (recipes) {
 
-            var key = child.key;
-            if (key.endsWith("Ingredients")) {
-
-              var ingredientList = child.val();
-              var i;
-              for (i = 0; i < ingredientList.length; i++) {
-
-                // Array containing name and quantity from db
-                var thisIngredient = ingredientList[i];
-
-                // Ingredient name
-                var type = thisIngredient[0];
-
-                // Quantity and Units
-                var formattedQuantity = thisIngredient[1] + " " + thisIngredient[2];
-
-                // Append to grocery list
-                ingredientsMap[type] = formattedQuantity;
-
-              }
-            }
-          });
-
-          // Add to webpage
-          Object.keys(ingredientsMap).forEach(function(key) {
-            $(".grocery-list").append('<li class="list-group-item">' + key + ' (' + ingredientsMap[key] + ')</li>');
+        $('.non-empty-state').show();
+        $('.empty-state').hide();
+        Object.keys(recipes).forEach(id => {
+          recipes[id].forEach(ingredient => {
+            const ingredientItem =
+              $(`<li class="list-group-item ingredient-item">
+                ${ingredient.original}
+              </li>`);
+            $('.grocery-list').append(ingredientItem);
           })
-        }
-        else {
-          $('.non-empty-state').hide();
-          $('.empty-state').show();
-        }
+        });
 
-      });
+      } else {
+        $('.non-empty-state').hide();
+        $('.empty-state').show();
+      }
+    });
 
   }
 
@@ -106,12 +87,18 @@ $(document).ready(() => {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       setWeek();
-      getCalendarIngredients();
+      getThisWeeksIngredients();
     }
   });
 
   /*** Event Handlers ***/
-  $('.prev-week-btn').on('click', () => setWeek('prev'));
-  $('.next-week-btn').on('click', () => setWeek('next'));
+  $('.prev-week-btn').on('click', () => {
+    setWeek('prev');
+    getThisWeeksIngredients();
+  });
+  $('.next-week-btn').on('click', () => {
+    setWeek('next');
+    getThisWeeksIngredients();
+  });
 
 });

@@ -70,62 +70,32 @@ $(document).ready(function() {
     getCalendarFromDB();
   }
 
-  function addRecipeItem(id, meal, name) {
+  function addRecipeItem(recipeId, meal, name) {
     const listItem = $(
       `<li class="list-group-item ${meal}-recipe">
         <div class="name">${name}</div>
         <div class="r-btn remove-recipe-btn action"><i class="fa fa-trash"></i></div>
       </li>`);
 
-    listItem.find('.name').on('click', () => window.location.replace(`${window.location.origin}/recipe/${id}`));
-    listItem.find('.remove-recipe-btn').on('click', (e) => removeRecipeItemDB(e, meal, id));
+    listItem.find('.name').on('click', () => window.location.replace(`${window.location.origin}/recipe/${recipeId}`));
+    listItem.find('.remove-recipe-btn').on('click', (e) => {
+      removeRecipeItem(e)
+      removeFromCalendarDB(meal, recipeId);
+      removeFromGroceriesDB(recipeId);
+    });
 
     $(`.list-${meal}`).append(listItem);
-
   }
 
-  function addRecipeItemDB(id, meal, name) {
-    db.ref(`/users/${auth.currentUser.uid}/calendar/${currentMoment.format(DB_DATE)}/${meal}`)
-      .update({
-        [id]: name
-      });
-  }
-
-  function addGroceryDB(id, meal, name) {
-    db.ref(`/users/${auth.currentUser.uid}/calendar/${currentMoment.format(DB_DATE)}/${meal}`)
-      .update({
-        [id]: name
-      });
-  }
-
-  function removeRecipeItemDB(e, meal, id) {
+  function removeRecipeItem(e) {
     $(e.target).closest('.list-group-item').remove();
-    db.ref(`/users/${auth.currentUser.uid}/calendar/${currentMoment.format(DB_DATE)}/${meal}/${id}`).remove();
-  }
-
-  function getCalendarFromDB() {
-    if (auth.currentUser) {
-      clearMealsRecipes();
-
-      db.ref(`/users/${auth.currentUser.uid}/calendar/${currentMoment.format(DB_DATE)}`).once('value', res => {
-        const meals = res.val();
-        if (meals) {
-          Object.keys(meals).forEach(meal => {
-            const recipes = meals[meal];
-            Object.keys(recipes).forEach(id => {
-              const name = recipes[id];
-              addRecipeItem(id, meal, name);
-            })
-          })
-        }
-      });
-    }
   }
 
   function addRecipeItemCallback(recipeId, type, recipeTitle) {
     return function() {
       addRecipeItem(recipeId, type, recipeTitle);
-      addRecipeItemDB(recipeId, type, recipeTitle);
+      addToCalendarDB(recipeId, type, recipeTitle);
+      addToGroceriesDB(recipeId, type, recipeTitle);
       $('#myModal').modal('toggle');
     }
   }
@@ -152,7 +122,88 @@ $(document).ready(function() {
     }
   }
 
-  function getFavoriteRecipesFromDB(type) {
+  function clearMealsRecipes() {
+    $('.breakfast-recipe').remove();
+    $('.lunch-recipe').remove();
+    $('.dinner-recipe').remove();
+  }
+
+  function toggleModal(type) {
+    // Get user's favorite recipes
+    getFavoriteRecipesDB(type);
+    $('#myModal').modal('toggle');
+  }
+
+  function addToCalendarDB(recipeId, meal, name) {
+    db.ref(`/users/${auth.currentUser.uid}/calendar/${currentMoment.format(DB_DATE)}/${meal}`)
+      .update({
+        [recipeId]: name
+      });
+  }
+
+  function addToGroceriesDB(recipeId) {
+    const cmCopy = currentMoment.clone(); // moment() is mutable
+    const URL = `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${recipeId}/information`;
+
+    if (auth.currentUser) {
+      // GETTING INGREDIENTS FROM API
+      $.ajax({
+        url: URL,
+        type: 'GET',
+        dataType: 'json',
+        headers: {
+          'X-Mashape-Key': 'fE0JDoXOrQmshCwRo1DwJRH2XhXKp1YnYEAjsnBx1IKReJz2Bv'
+        },
+        success: (recipe) => {
+          const ingredients = [];
+          recipe.extendedIngredients.forEach(ingredient => {
+            ingredients.push({
+              name: ingredient.name,
+              amount: ingredient.amount,
+              unit: ingredient.unit,
+              original: ingredient.original
+            });
+          });
+
+          // SETTING GORCERIES IN DB
+          db.ref(`/users/${auth.currentUser.uid}/groceries/${cmCopy.isoWeekday(1).format(DB_DATE)}`)
+            .update({
+              [recipeId]: ingredients
+            });
+        }
+      });
+    }
+  }
+
+  function removeFromCalendarDB(meal, recipeId) {
+    db.ref(`/users/${auth.currentUser.uid}/calendar/${currentMoment.format(DB_DATE)}/${meal}/${recipeId}`).remove();
+  }
+
+  function removeFromGroceriesDB(recipeId) {
+    const cmCopy = currentMoment.clone(); // moment() is mutable
+    db.ref(`/users/${auth.currentUser.uid}/groceries/${cmCopy.isoWeekday(1).format(DB_DATE)}/${recipeId}`).remove();
+  }
+
+  function getCalendarFromDB() {
+    if (auth.currentUser) {
+      clearMealsRecipes();
+
+      db.ref(`/users/${auth.currentUser.uid}/calendar/${currentMoment.format(DB_DATE)}`).once('value', res => {
+        const meals = res.val();
+        if (meals) {
+          Object.keys(meals).forEach(meal => {
+            const recipes = meals[meal];
+            Object.keys(recipes).forEach(recipeId => {
+              const name = recipes[recipeId];
+              addRecipeItem(recipeId, meal, name);
+            })
+          })
+        }
+      });
+    }
+  }
+
+  function getFavoriteRecipesDB(type) {
     if (auth.currentUser) {
       $('#myModalList').empty();
 
@@ -162,7 +213,7 @@ $(document).ready(function() {
 
         var displayNum = 0;
         var recipeList = Object.keys(recipes);
-        var actualRecipeListLength = recipeList.length/2;
+        var actualRecipeListLength = recipeList.length / 2;
         if (actualRecipeListLength < 5)
           displayNum = actualRecipeListLength;
         else
@@ -181,18 +232,6 @@ $(document).ready(function() {
         }
       });
     }
-  }
-
-  function clearMealsRecipes() {
-    $('.breakfast-recipe').remove();
-    $('.lunch-recipe').remove();
-    $('.dinner-recipe').remove();
-  }
-
-  function toggleModal(type) {
-    // Get user's favorite recipes
-    getFavoriteRecipesFromDB(type);
-    $('#myModal').modal('toggle');
   }
 
   /*** Initializers ***/
